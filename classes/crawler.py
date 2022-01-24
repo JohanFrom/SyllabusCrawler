@@ -1,7 +1,8 @@
+from ast import While
+from cgitb import text
 from distutils.log import error
 from re import search
 from urllib import response
-import webbrowser
 from xml.sax.handler import ErrorHandler
 from bs4 import BeautifulSoup
 from urllib.request import URLopener, urlopen
@@ -15,34 +16,32 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-elements_list = []
+text_list = []
 
 ''' -v- BeautifulSoup -v- '''
 def Scrape(url):
     response = urlopen(url) # Öppna decodat som UTF-8, annars läses url som sträng
     html = response.read()
     soup = BeautifulSoup(html, 'html.parser')
-    p = soup.find_all("p")
-    elements_list.append(p)
-    return
+    allText = soup.get_text()
     
+    blacklist = ["\n"]
+    formatted_output = [word for word in allText if
+                        word not in blacklist]
+    
+    print(''.join(formatted_output))
+    text_list.append(formatted_output)
+    
+
+def Convert_to_JSON():
+    print("Konverterar...")
 
 
 ''' -v- Selenium WebDriver -v- '''
 def Selenium_WebDriver():
     Search_Terms()
 
-    while True: # While loop som håller fönstret öppet
-        print(".")
-        time.sleep(5)
-        # Avbryt loopen med "Ctrl + C" i terminalen (temporär lösning)
-
-
-
-
 def Initialize_GUI(driver):
-    chrome_options = Options()
-    chrome_options.add_experimental_option("detach", True) #Håller fönstret uppe (verkar inte funka 100%)
     driver.maximize_window()
     driver.get("https://www.google.com/") # Startar browsern - OBS använd försiktigt, inte i loopar eller liknande      
 
@@ -51,7 +50,7 @@ def Search_Terms():
     keyword = input("Sökord: ")
     
     if keyword:
-        for i in range(1, 10):
+        for i in range(1, 4): # Antal länkar som klickas in på
             #-----------------WebDriver Setup--------------------
             s=Service("C:\Program Files (x86)\chromedriver.exe")
             op = webdriver.ChromeOptions()
@@ -59,7 +58,7 @@ def Search_Terms():
             Initialize_GUI(driver)
             #----------------------------------------------------
 
-            driver.find_element(By.ID, "L2AGLb").click() # Klickar godkänn på användaravtal/gdpr knappen
+            driver.find_element(By.ID, "L2AGLb").click() # Klickar godkänn på googles användaravtal/gdpr knapp
             select_search = driver.find_element(By.NAME, 'q') # Välj google search bar
             
             select_search.send_keys(keyword) # Skriv in sökord i search bar
@@ -75,14 +74,12 @@ def Search_Terms():
             find_results_div = driver.find_element(By.XPATH, xpath) # Hitta länken
             find_results_div.click() # Klicka in på länken
             
-            WebDriverWait(driver, 10) # Låt sidan ladda, annars läses fel url in
+            WebDriverWait(driver, 20) # Låt sidan ladda, annars läses fel url in
             url = driver.current_url # Inklickade sidans url
 
+            
             Scrape(url) # Kalla på Scrape med nuvarande url
-            driver.quit() # Stäng driver efter varje iteration
 
-
-    
 
 
 # 1. Scraping av resultaten
