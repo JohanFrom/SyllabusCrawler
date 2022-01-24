@@ -50,7 +50,7 @@ def Search_Terms(keyword):
     print("KÖR SEARCH_TERMS med keyword: ", keyword)
     
     if keyword != "":
-        for i in range(1, 6): # Antal länkar som klickas in på
+        for i in range(1, 5): # Antal länkar som klickas in på
             #-----------------WebDriver Setup--------------------
             s=Service("C:\Program Files (x86)\chromedriver.exe")
             op = webdriver.ChromeOptions()
@@ -68,9 +68,7 @@ def Search_Terms(keyword):
             if i <= 1:
                 xpath = f'/html/body/div[7]/div/div[10]/div[1]/div/div[2]/div[2]/div/div/div[{i}]/div/div/div[1]/a/div'
             elif i >= 1:
-                xpath = f'/html/body/div[7]/div/div[10]/div[1]/div/div[2]/div[2]/div/div/div[{i}]/div/div[1]/div/a/div'
-            elif "/ul" in xpath:
-                pass             
+                xpath = f'/html/body/div[7]/div/div[10]/div[1]/div/div[2]/div[2]/div/div/div[{i}]/div/div[1]/div/a/div'          
             else:
                 pass
                 
@@ -114,4 +112,3 @@ def print_scrape():
 # 2. Välj nästa söknings länk
     # 2.1 Upprepa 1.1 - 1.5
     # 2.2 Gör detta n antal gånger
-        

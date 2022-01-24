@@ -1,8 +1,7 @@
 # Here runs the main code
 
-
+from classes import htmlscraper
 from classes import crawler
-import time
 
 from flask import Flask, render_template, request, flash
 
