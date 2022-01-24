@@ -50,7 +50,7 @@ def Search_Terms(keyword):
     print("KÖR SEARCH_TERMS med keyword: ", keyword)
     
     if keyword != "":
-        for i in range(1, 5): # Antal länkar som klickas in på
+        for i in range(1, 2): # Antal länkar som klickas in på
             #-----------------WebDriver Setup--------------------
             s=Service("C:\Program Files (x86)\chromedriver.exe")
             op = webdriver.ChromeOptions()
