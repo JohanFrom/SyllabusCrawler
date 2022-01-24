@@ -1,6 +1,8 @@
 # Here runs the main code
 
+
 from classes import crawler
+import time
 
 from flask import Flask, render_template, request, flash
 
@@ -10,22 +12,23 @@ app = Flask(__name__, static_url_path='/static')
 def index():
     return render_template('index.html')
 
-@app.route('/', methods = ["GET", "POST"])
+@app.route('/read', methods = ["GET", "POST"])
 def read_input():
-    try:
-        keyword1 = request.form.get("keyword1")
-        keyword2 = request.form.get("keyword2")
-        keyword3 = request.form.get("keyword3")
-        
-        #Send seperate
-        test = crawler.Scrape(keyword1, keyword2, keyword3)
-        
-        
-        return render_template('/', result=test)
-        
-    except:
-        flash("Something went wrong, try again!")
-        return render_template('/')
+    search_input = request.form.get("search-input")
+
+    '''
+    keyword1 = request.form.get("keyword1")
+    keyword2 = request.form.get("keyword2")
+    keyword3 = request.form.get("keyword3")
+    '''
+    
+    #Send seperate
+    crawler.Search_Terms(search_input)
+    results_list = []
+    x = crawler.print_scrape()
+    results_list.append(x)
+
+    return render_template('index.html', result=results_list)
         
 
 if __name__ == '__main__':

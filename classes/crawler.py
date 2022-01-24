@@ -20,37 +20,37 @@ text_list = []
 
 ''' -v- BeautifulSoup -v- '''
 def Scrape(url):
+    print("KÖR SCRAPE med url: ", url)
+    
+
     response = urlopen(url) # Öppna decodat som UTF-8, annars läses url som sträng
     html = response.read()
     soup = BeautifulSoup(html, 'html.parser')
     allText = soup.get_text()
     
-    blacklist = ["\n"]
+    blacklist = ["\n", "\r"]
     formatted_output = [word for word in allText if
                         word not in blacklist]
     
-    print(''.join(formatted_output))
-    text_list.append(formatted_output)
+    joinwords = ''.join(formatted_output)
+    text_list.append(joinwords)
+    return text_list
     
 
 def Convert_to_JSON():
     print("Konverterar...")
 
 
-''' -v- Selenium WebDriver -v- '''
-def Selenium_WebDriver():
-    Search_Terms()
-
 def Initialize_GUI(driver):
     driver.maximize_window()
     driver.get("https://www.google.com/") # Startar browsern - OBS använd försiktigt, inte i loopar eller liknande      
 
 
-def Search_Terms():
-    keyword = input("Sökord: ")
+def Search_Terms(keyword):
+    print("KÖR SEARCH_TERMS med keyword: ", keyword)
     
-    if keyword:
-        for i in range(1, 4): # Antal länkar som klickas in på
+    if keyword != "":
+        for i in range(1, 6): # Antal länkar som klickas in på
             #-----------------WebDriver Setup--------------------
             s=Service("C:\Program Files (x86)\chromedriver.exe")
             op = webdriver.ChromeOptions()
@@ -69,6 +69,10 @@ def Search_Terms():
                 xpath = f'/html/body/div[7]/div/div[10]/div[1]/div/div[2]/div[2]/div/div/div[{i}]/div/div/div[1]/a/div'
             elif i >= 1:
                 xpath = f'/html/body/div[7]/div/div[10]/div[1]/div/div[2]/div[2]/div/div/div[{i}]/div/div[1]/div/a/div'
+            elif "/ul" in xpath:
+                pass             
+            else:
+                pass
                 
             
             find_results_div = driver.find_element(By.XPATH, xpath) # Hitta länken
@@ -76,11 +80,13 @@ def Search_Terms():
             
             WebDriverWait(driver, 20) # Låt sidan ladda, annars läses fel url in
             url = driver.current_url # Inklickade sidans url
+            if "pdf" in url:
+                pass
+            else :
+                Scrape(url) # Kalla på Scrape med nuvarande url
 
-            
-            Scrape(url) # Kalla på Scrape med nuvarande url
-
-
+def print_scrape():
+    return text_list
 
 # 1. Scraping av resultaten
     # 1.1 Hitta och välj första söknings länken
@@ -109,7 +115,3 @@ def Search_Terms():
     # 2.1 Upprepa 1.1 - 1.5
     # 2.2 Gör detta n antal gånger
         
-    
-    
-
-Selenium_WebDriver()
