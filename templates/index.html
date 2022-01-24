@@ -4,9 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/style.css" rel=stylesheet>
     <title>Document</title>
 </head>
 <body>
     <h1>SyllabusCrawler</h1>
+
+    <div id="keywords">
+        <form action="">
+            <label class="labels" for="keyword1">Nyckelord 1</label>
+            <input id="keyword1" type="text">
+            <label class="labels" for="keyword2">Nyckelord 2</label>
+            <input id="keyword2" type="text">
+            <label class="labels" for="keyword3">Nyckelord 3</label>
+            <input id="keyword3" type="text">
+            
+            <input id="reset" type="submit" value="Reset">
+            <input id="scrape" type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div id="scrape_output">
+        <h2>Results of scrape</h2>
+    </div>
+    
 </body>
 </html>
