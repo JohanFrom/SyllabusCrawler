@@ -26,6 +26,10 @@
 
     <div id="scrape_output">
         <h2>Results of scrape</h2>
+
+        {% for scrape in result %}
+        <p>{{ scrape }}</p>
+        {% endfor %}
     </div>
     
 </body>
