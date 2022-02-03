@@ -1,1 +1,9 @@
 Flask==1.02
+beautifulsoup4==4.10.0
+click==8.0.3
+Flask==2.0.2
+requests==2.27.1
+selenium==4.1.0
+soupsieve==2.3.1
+urllib3==1.26.8
+webdriver-manager==3.5.2
