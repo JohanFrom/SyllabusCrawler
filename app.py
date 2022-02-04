@@ -1,6 +1,7 @@
 # Here runs the main code
 
 from classes import crawler
+from classes import test
 
 from flask import Flask, render_template, request, flash
 
@@ -21,10 +22,7 @@ def read_input():
     '''
     
     #Send seperate
-    crawler.Search_Terms(search_input)
-    results_list = []
-    x = crawler.print_scrape()
-    results_list.append(x)
+    results_list = test.Search_Terms(search_input)
 
     return render_template('index.html', result=results_list)
         

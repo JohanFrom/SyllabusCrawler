@@ -84,30 +84,3 @@ def Search_Terms(keyword):
 
 def print_scrape():
     return text_list
-
-# 1. Scraping av resultaten
-    # 1.1 Hitta och välj första söknings länken
-    # 1.2 Skicka url från sidan till Scrape(url)
-    # 1.3 Spara resultaten från HTML-scrape i JSON-format (ny funktion eller i Scrape() 
-    ''' 
-    Exempel/förslag på JSON-format 
-    [
-        sida1 = {
-            "lärandemål": [<p> blabla </p>, <p></p>, <p></p>],
-            "innehåll": [<p> blabla </p>, <p></p>, <p></p>],
-            syfte: [<p> blabla </p>, <p></p>, <p></p>]
-            }, 
-        
-        sida2 = {
-            "lärandemål": [<p> blabla </p>, <p></p>, <p></p>],
-            "innehåll": [<p> blabla </p>, <p></p>, <p></p>],
-            "syfte": [<p> blabla </p>, <p></p>, <p></p>]
-            }, 
-    ]
-    '''
-    # 1.4 Kolla ifall PDF eller txt filer finns
-    # 1.5 Gör en scrape av dessa och spara på samma sätt (om möjligt) 
-
-# 2. Välj nästa söknings länk
-    # 2.1 Upprepa 1.1 - 1.5
-    # 2.2 Gör detta n antal gånger
