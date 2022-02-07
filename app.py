@@ -1,6 +1,6 @@
 # Here runs the main code
 
-from classes import crawler
+from classes import crawler, filtration
 
 from flask import Flask, render_template, request, flash
 
@@ -12,6 +12,7 @@ def index():
 
 @app.route('/read', methods = ["GET", "POST"])
 def read_input():
+    results_list = []
     search_input = request.form.get("search-input")
 
     '''
@@ -19,19 +20,21 @@ def read_input():
     keyword2 = request.form.get("keyword2")
     keyword3 = request.form.get("keyword3")
     '''
-
-    #Scrape ---------------------------
+    # ------------ Scrape ---------------
     crawler.Search_Terms(search_input)
-    results_list = []
-    x = crawler.print_scrape()
-    results_list.append(x)
-    # ----------------------------------
+    scrape_result = crawler.print_scrape()
+    # -----------------------------------
     
+    # ------------ Filter ---------------
+    #filter_result = filtration.filter_result(scrape_result)
+    results_list.append(scrape_result)
+    # -----------------------------------
     
-    if results_list == None:
-        return render_template('index.html', result=["Something went wrong"])
-    else:
-        return render_template('index.html', result=results_list)
+    for results in results_list:
+        if results == None:
+            return render_template('index.html', result=["Something went wrong"])
+        else:
+            return render_template('index.html', result=results)
         
 
 if __name__ == '__main__':
