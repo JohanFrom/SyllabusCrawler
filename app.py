@@ -1,8 +1,6 @@
 # Here runs the main code
 
-from unittest import result
 from classes import crawler
-from classes import test
 
 from flask import Flask, render_template, request, flash
 
@@ -21,13 +19,15 @@ def read_input():
     keyword2 = request.form.get("keyword2")
     keyword3 = request.form.get("keyword3")
     '''
-    
-    #Send seperate
-    
+
+    #Scrape ---------------------------
     crawler.Search_Terms(search_input)
     results_list = []
     x = crawler.print_scrape()
     results_list.append(x)
+    # ----------------------------------
+    
+    
     if results_list == None:
         return render_template('index.html', result=["Something went wrong"])
     else:
