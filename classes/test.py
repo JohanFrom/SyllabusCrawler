@@ -1,3 +1,5 @@
+from urllib import response
+from xmlrpc.client import ResponseError
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
@@ -6,11 +8,11 @@ from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
 
-
+result_list = []
 def Search_Terms(keyword):
     print("KÖR SEARCH_TERMS med keyword: ", keyword)
     
-    result_list = []
+    
 
     if keyword != "":
         #-----------------WebDriver Setup--------------------
@@ -28,11 +30,16 @@ def Search_Terms(keyword):
         url = driver.current_url # Inklickade sidans url
         href_list = scrape_google(url)
 
-        for url in href_list:
-            print(url)
-            #text = webscrape(url)
-            #result_list.append(text)
-    return 
+        for urls in href_list:
+            #print(url)
+            result_list.append(urls)
+            webscrape()
+            #for url in urls:
+                #print(url)
+                #text = webscrape(url)
+                #print(text)
+                #result_list.append(text)
+        #return result_list 
 
 
 
@@ -67,14 +74,36 @@ def scrape_google(url):
 
 
 
-
+'''
 def webscrape(url):
+    print(result_list)
     response = urlopen(url) # Öppna decodat som UTF-8, annars läses url som sträng
     html = response.read()
     soup = BeautifulSoup(html, 'html.parser')
     scrape_result = soup.get_text()
     return scrape_result
-
+'''
+def webscrape():
+    text_list = []
+    #print(result_list)
+    for urls in result_list:
+        for url in urls:
+            try:
+                #print(url)
+                
+                response = urlopen(url) # Öppna decodat som UTF-8, annars läses url som sträng
+                
+                if response.getcode() == 404 and "pdf" in url:
+                    return;
+                else:
+                    print(response)
+                    html = response.read()
+                    soup = BeautifulSoup(html, 'html.parser')
+                    scrape_result = soup.get_text()
+                    text_list.append(scrape_result)
+                    return scrape_result
+            except:
+                print("Länk gick inte att öppna")
 
 
 

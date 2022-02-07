@@ -1,5 +1,6 @@
 # Here runs the main code
 
+from unittest import result
 from classes import crawler
 from classes import test
 
@@ -22,9 +23,15 @@ def read_input():
     '''
     
     #Send seperate
-    results_list = test.Search_Terms(search_input)
-
-    return render_template('index.html', result=results_list)
+    
+    crawler.Search_Terms(search_input)
+    results_list = []
+    x = crawler.print_scrape()
+    results_list.append(x)
+    if results_list == None:
+        return render_template('index.html', result=["Something went wrong"])
+    else:
+        return render_template('index.html', result=results_list)
         
 
 if __name__ == '__main__':

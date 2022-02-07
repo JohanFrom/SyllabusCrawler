@@ -82,5 +82,6 @@ def Search_Terms(keyword):
             else :
                 Scrape(url) # Kalla på Scrape med nuvarande url
 
+# Ända syfte är att returna resultatet av scrape
 def print_scrape():
     return text_list
