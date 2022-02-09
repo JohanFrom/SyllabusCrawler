@@ -30,13 +30,12 @@ def Scrape(url):
     soup = BeautifulSoup(html, 'html.parser')
     allText = soup.get_text()
     
-    blacklist = ["\n", "\r"]
+    blacklist = ["\n", "\r", "\t"]
     formatted_output = [word for word in allText if
                         word not in blacklist]
     
     joinwords = ''.join(formatted_output)
     text_list.append(joinwords)
-    return text_list
     
 
 def Convert_to_JSON():
