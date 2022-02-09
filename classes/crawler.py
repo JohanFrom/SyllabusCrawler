@@ -5,7 +5,7 @@ from re import search
 from urllib import response
 from xml.sax.handler import ErrorHandler
 from bs4 import BeautifulSoup
-from urllib.request import URLopener, urlopen
+from urllib.request import Request, URLopener, urlopen
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from soupsieve import select
@@ -21,19 +21,18 @@ text_list = []
 def Scrape(url):
     print("KÖR SCRAPE med url: ", url)
     
-
-    response = urlopen(url) # Öppna decodat som UTF-8, annars läses url som sträng
+    req = Request(url, headers={'User-Agent': 'Google/98.0'})
+    response = urlopen(req) # Öppna decodat som UTF-8, annars läses url som sträng
     html = response.read()
     soup = BeautifulSoup(html, 'html.parser')
     allText = soup.get_text()
     
-    blacklist = ["\n", "\r"]
+    blacklist = ["\n", "\r", "\t"]
     formatted_output = [word for word in allText if
                         word not in blacklist]
     
     joinwords = ''.join(formatted_output)
     text_list.append(joinwords)
-    return text_list
     
 
 def Convert_to_JSON():
@@ -49,7 +48,7 @@ def Search_Terms(keyword):
     print("KÖR SEARCH_TERMS med keyword: ", keyword)
     
     if keyword != "":
-        for i in range(1, 2): # Antal länkar som klickas in på
+        for i in range(1, 10): # Antal länkar som klickas in på
             #-----------------WebDriver Setup--------------------
             s=Service("C:\Program Files (x86)\chromedriver.exe")
             op = webdriver.ChromeOptions()
@@ -65,12 +64,13 @@ def Search_Terms(keyword):
 
             # Första XPATH har en extra div, därefter ser alla likadana ut
             if i <= 1:
-                xpath = f'/html/body/div[7]/div/div[10]/div[1]/div/div[2]/div[2]/div/div/div[{i}]/div/div/div[1]/a/div'
+                xpath = f'//*[@id="rso"]/div[1]/div/div[1]/div/div[1]/div/div/div/div/div[2]/div/div/div[1]'
             elif i >= 1:
-                xpath = f'/html/body/div[7]/div/div[10]/div[1]/div/div[2]/div[2]/div/div/div[{i}]/div/div[1]/div/a/div'          
+                xpath = f'//*[@id="rso"]/div[{i}]/div/div[1]/div'          
             else:
                 pass
-                
+                # Funkade 2022-02-09: //*[@id="rso"]/div[1]/div/div[1]/div/div[1]/div/div/div/div/div[2]/div/div/div[1]
+                # Funkade 2022-02-09: //*[@id="rso"]/div[2]/div/div[1]/div (glöm inte {i} på 2)
             
             find_results_div = driver.find_element(By.XPATH, xpath) # Hitta länken
             find_results_div.click() # Klicka in på länken
