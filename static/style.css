@@ -9,6 +9,11 @@ h1 {
     text-decoration: underline;
 }
 
+#keywords{
+    max-width: 60rem;
+    margin: auto;
+}
+
 #keywords > form{
     display: flex;
     flex-direction: column;
@@ -56,4 +61,8 @@ h1 {
 #scrape_output > h2 {
     display: flex;
     justify-content: center;
+}
+
+#search-button{
+    max-width: 5rem;
 }
