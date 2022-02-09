@@ -12,9 +12,9 @@ def index():
 
 @app.route('/read', methods = ["GET", "POST"])
 def read_input():
+    
     results_list = []
-    search_input = request.form.get("search-input")
-
+    search_input = request.form.get("search-input")   
     '''
     keyword1 = request.form.get("keyword1")
     keyword2 = request.form.get("keyword2")
