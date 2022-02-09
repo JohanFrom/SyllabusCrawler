@@ -1,18 +1,9 @@
-from ast import While
-from cgitb import text
-from distutils.log import error
-from re import search
-from urllib import response
-from xml.etree.ElementPath import find
-from xml.sax.handler import ErrorHandler
+from urllib import *
 from bs4 import BeautifulSoup
-from urllib.request import Request, URLopener, urlopen
+from urllib.request import Request, urlopen
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from soupsieve import select
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException, InvalidArgumentException, NoSuchWindowException
