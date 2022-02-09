@@ -52,23 +52,29 @@ def Search_Terms(keyword):
     if keyword != "":
         #-----------------WebDriver Setup--------------------
         try:
-            for i in range(5):
+            for i in range(1, 10): # Antal länkar som klickas in på
+                #-----------------WebDriver Setup--------------------
                 s=Service("C:\Program Files (x86)\chromedriver.exe")
                 op = webdriver.ChromeOptions()
                 driver = webdriver.Chrome(service=s, options=op)
                 Initialize_GUI(driver)
                 #----------------------------------------------------
+
                 driver.find_element(By.ID, "L2AGLb").click() # Klickar godkänn på googles användaravtal/gdpr knapp
                 select_search = driver.find_element(By.NAME, 'q') # Välj google search bar
+                
                 select_search.send_keys(keyword) # Skriv in sökord i search bar
                 select_search.send_keys(Keys.RETURN) # Klickar enter med sökord och gör sökning
-                
+
+                # Första XPATH har en extra div, därefter ser alla likadana ut
                 if i <= 1:
-                    xpath = f'//[@id="rso"]/div[1]/div/div[1]/div/div[1]/div/div/div/div/div[2]/div/div/div[1]'
+                    xpath = f'//*[@id="rso"]/div[1]/div/div[1]/div/div[1]/div/div/div/div/div[2]/div/div/div[1]'
                 elif i >= 1:
-                    xpath = f'//[@id="rso"]/div[{i}]/div/div[1]/div' 
+                    xpath = f'//*[@id="rso"]/div[{i}]/div/div[1]/div'          
                 else:
                     pass
+                    # Funkade 2022-02-09: //*[@id="rso"]/div[1]/div/div[1]/div/div[1]/div/div/div/div/div[2]/div/div/div[1]
+                    # Funkade 2022-02-09: //*[@id="rso"]/div[2]/div/div[1]/div (glöm inte {i} på 2)
             
                 find_results_div = driver.find_element(By.XPATH, xpath) # Hitta länken
                 
@@ -88,7 +94,7 @@ def Search_Terms(keyword):
             print("--------------------------[ End Error Message ]-------------------------")
             print("")
             
-            
+
 
 # Ända syfte är att returna resultatet av scrape
 def print_scrape():
