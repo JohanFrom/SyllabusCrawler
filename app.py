@@ -35,7 +35,15 @@ def read_input():
             return render_template('index.html', result=["Something went wrong"])
         else:
             return render_template('index.html', result=results)
-        
+
+
+@app.route("/clear", methods = ["GET", "POST"])
+def clear_result():  
+    empty_list = []
+    
+    #clear_data = crawler.print_scrape()
+    empty_list.append("")
+    return render_template('index.html', result=empty_list)
 
 if __name__ == '__main__':
     app.secret_key = "SecretKey"

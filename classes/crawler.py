@@ -13,8 +13,8 @@ from selenium.common.exceptions import NoSuchElementException, InvalidArgumentEx
 text_list = []
 
 ''' -v- BeautifulSoup -v- '''
-def Scrape(url):
-    print(colored("KÖR SCRAPE med url: ", 'yellow'), url)
+def Scrape(url, count):
+    print(f"{count}.", colored("KÖR SCRAPE med url: ", "yellow"), url)
     
     req = Request(url, headers={'User-Agent': 'Google/98.0'})
     response = urlopen(req) # Öppna decodat som UTF-8, annars läses url som sträng
@@ -39,6 +39,7 @@ def Initialize_GUI(driver):
     driver.get("https://www.google.com/") # Startar browsern - OBS använd försiktigt, inte i loopar eller liknande          
 
 def Search_Terms(keyword):
+    count = -1
     print("")
     print("KÖR SEARCH_TERMS med keyword: ", colored(keyword, 'green'))
     if keyword != "":
@@ -48,7 +49,7 @@ def Search_Terms(keyword):
                 #-----------------WebDriver Setup--------------------
                 s=Service("C:\Program Files (x86)\chromedriver.exe")
                 op = webdriver.ChromeOptions()
-                op.add_argument("--headless")
+                op.add_argument("headless")
                 op.add_experimental_option('excludeSwitches', ['enable-logging'])
                 driver = webdriver.Chrome(service=s, options=op)
                 Initialize_GUI(driver)
@@ -76,10 +77,16 @@ def Search_Terms(keyword):
                 find_results_div.click() # Klicka in på länken
                 WebDriverWait(driver, 10) # Låt sidan ladda, annars läses fel url in
                 url = driver.current_url # Inklickade sidans url
+                count += 1
                 if "pdf" in url:
                     pass
+                    text_list.append("Kan ej Scrape .pdf-filer (för tillfället)")
+                elif "www.google.com" in url:
+                    print (f"{count}. ", colored("Skriver inte ut länk: ", "yellow"), "https://www.google.com")
+                    text_list.append(f"{count}. Visar inte sökresultat av www.google.com")
                 else :
-                    Scrape(url) # Kalla på Scrape med nuvarande url
+                    Scrape(url, count) # Kalla på Scrape med nuvarande url
+                
         except (NoSuchElementException, TypeError, InvalidArgumentException, NoSuchWindowException) as e:
             text_list.append(f"Error Message: {e}")
             print("")
