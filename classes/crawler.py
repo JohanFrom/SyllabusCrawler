@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import NoSuchElementException, InvalidArgumentException, NoSuchWindowException
+from selenium.common.exceptions import NoSuchElementException, InvalidArgumentException, NoSuchWindowException, ElementNotInteractableException
 
 
 text_list = []
@@ -15,7 +15,6 @@ text_list = []
 ''' -v- BeautifulSoup -v- '''
 def Scrape(url, count):
     print(f"{count}.", colored("KÖR SCRAPE med url: ", "yellow"), url)
-    
     req = Request(url, headers={'User-Agent': 'Google/98.0'})
     response = urlopen(req) # Öppna decodat som UTF-8, annars läses url som sträng
     html = response.read()
@@ -49,7 +48,6 @@ def Search_Terms(keyword):
                 #-----------------WebDriver Setup--------------------
                 s=Service("C:\Program Files (x86)\chromedriver.exe")
                 op = webdriver.ChromeOptions()
-                op.add_argument("headless")
                 op.add_experimental_option('excludeSwitches', ['enable-logging'])
                 driver = webdriver.Chrome(service=s, options=op)
                 Initialize_GUI(driver)
@@ -87,7 +85,7 @@ def Search_Terms(keyword):
                 else :
                     Scrape(url, count) # Kalla på Scrape med nuvarande url
                 
-        except (NoSuchElementException, TypeError, InvalidArgumentException, NoSuchWindowException) as e:
+        except (NoSuchElementException, TypeError, InvalidArgumentException, NoSuchWindowException, ElementNotInteractableException) as e:
             text_list.append(f"Error Message: {e}")
             print("")
             print(colored("--------------------------- [ Error Message ] --------------------------", 'red'))
