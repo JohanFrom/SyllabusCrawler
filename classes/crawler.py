@@ -13,7 +13,7 @@ text_list = []
 
 ''' -v- BeautifulSoup -v- '''
 def Scrape(url):
-    print("KÖR SCRAPE med url: ", url)
+    print(colored("KÖR SCRAPE med url: ", 'yellow'), url)
     
     req = Request(url, headers={'User-Agent': 'Google/98.0'})
     response = urlopen(req) # Öppna decodat som UTF-8, annars läses url som sträng
@@ -39,14 +39,16 @@ def Initialize_GUI(driver):
 
 def Search_Terms(keyword):
     print("")
-    print("KÖR SEARCH_TERMS med keyword: ", keyword)
+    print("KÖR SEARCH_TERMS med keyword: ", colored(keyword, 'green'))
     if keyword != "":
         #-----------------WebDriver Setup--------------------
         try:
-            for i in range(1, 10): # Antal länkar som klickas in på
+            for i in range(1, 5): # Antal länkar som klickas in på
                 #-----------------WebDriver Setup--------------------
                 s=Service("C:\Program Files (x86)\chromedriver.exe")
                 op = webdriver.ChromeOptions()
+                op.add_argument("--headless")
+                op.add_experimental_option('excludeSwitches', ['enable-logging'])
                 driver = webdriver.Chrome(service=s, options=op)
                 Initialize_GUI(driver)
                 #----------------------------------------------------
@@ -71,7 +73,7 @@ def Search_Terms(keyword):
                 
                 
                 find_results_div.click() # Klicka in på länken
-                WebDriverWait(driver, 20) # Låt sidan ladda, annars läses fel url in
+                WebDriverWait(driver, 10) # Låt sidan ladda, annars läses fel url in
                 url = driver.current_url # Inklickade sidans url
                 if "pdf" in url:
                     pass
@@ -80,9 +82,9 @@ def Search_Terms(keyword):
         except (NoSuchElementException, TypeError, InvalidArgumentException, NoSuchWindowException) as e:
             text_list.append(f"Error Message: {e}")
             print("")
-            print("--------------------------- [ Error Message ] --------------------------")
+            print(colored("--------------------------- [ Error Message ] --------------------------", 'red'))
             print(e)
-            print("--------------------------[ End Error Message ]-------------------------")
+            print(colored("--------------------------[ End Error Message ]-------------------------", 'red'))
             print("")
             
 
