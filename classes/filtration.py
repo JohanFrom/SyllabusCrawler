@@ -1,5 +1,4 @@
-from posixpath import split
-
+'''Filtering av scrape resultat'''
 
 def filter_result(results_list):
     '''Syfte, innehåll och mål'''

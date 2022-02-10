@@ -1,5 +1,5 @@
 import os
-from dotenv import dotenv
+from dotenv import load_dotenv
 from termcolor import colored
 from urllib import *
 from bs4 import BeautifulSoup
@@ -10,9 +10,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException, InvalidArgumentException, NoSuchWindowException, ElementNotInteractableException
-
-load_dotenv()
-
 
 text_list = []
 
@@ -52,6 +49,7 @@ def Search_Terms(keyword):
                 #-----------------WebDriver Setup--------------------
                 s=Service("C:\Program Files (x86)\chromedriver.exe")
                 op = webdriver.ChromeOptions()
+                # Lägg till --headless på något sätt
                 op.add_experimental_option('excludeSwitches', ['enable-logging'])
                 driver = webdriver.Chrome(service=s, options=op)
                 Initialize_GUI(driver)
@@ -67,11 +65,9 @@ def Search_Terms(keyword):
                 if i <= 1:
                     xpath = f'//*[@id="rso"]/div[1]/div/div[1]/div/div[1]/div/div/div/div/div[2]/div/div/div[1]'
                 elif i >= 1:
-                    xpath = f'//*[@id="rso"]/div[{i}]/div/div[1]/div'          
+                    xpath = f'//*[@id="rso"]/div[{i}]/div/div[1]/div'
                 else:
                     pass
-                    # Funkade 2022-02-09: //*[@id="rso"]/div[1]/div/div[1]/div/div[1]/div/div/div/div/div[2]/div/div/div[1]
-                    # Funkade 2022-02-09: //*[@id="rso"]/div[2]/div/div[1]/div (glöm inte {i} på 2)
             
                 find_results_div = driver.find_element(By.XPATH, xpath) # Hitta länken
                 
