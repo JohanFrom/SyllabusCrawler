@@ -1,3 +1,5 @@
+import os
+from dotenv import dotenv
 from termcolor import colored
 from urllib import *
 from bs4 import BeautifulSoup
@@ -8,6 +10,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException, InvalidArgumentException, NoSuchWindowException, ElementNotInteractableException
+
+load_dotenv()
 
 
 text_list = []
