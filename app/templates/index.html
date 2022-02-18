@@ -11,7 +11,7 @@
     <h1>SyllabusCrawler</h1>
 
     <div id="form_scrape">
-        <form action="{{url_for('read_input')}}" method = "POST">
+        <form action="{{url_for('read_input')}}" method="post">
             <label class="search-bar" for="search-bar">Sök här:</label>
             <input id="search-input" name="search-input" type="text">
             <button id="search-button">Sök</button>
@@ -22,7 +22,7 @@
     </div>
 
     <div id="clear_output">
-        <form action="{{url_for('clear_result')}}" method = "POST">
+        <form >
             <button>Rensa resultat</button>
         </form>
     </div>
