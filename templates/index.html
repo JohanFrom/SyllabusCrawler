@@ -13,8 +13,11 @@
     <div id="form_scrape">
         <form id="search_form" action="{{url_for('read_input')}}" method="post" onsubmit="return CheckInput()">
             <label class="search-bar" for="search-bar">Sök här:</label>
-            <span id="error-message"></span>
+            <span id="error-message-input"></span>
             <input id="search-input" name="search-input" type="text">
+            <label class="search-bar" for="amount-of-pages">Antal sidor den ska checka (max 15):</label>
+            <span id="error-message-number"></span>
+            <input id="amount-of-pages" name="amount-of-pages" type="text">
             <button id="search-button">Sök</button>
             
             <!--<input id="reset" type="submit" value="Reset">

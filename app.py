@@ -12,20 +12,30 @@ def index():
 
 @app.route("/search", methods=["POST"])
 def read_input():
-    results_list = []
-    search_word = request.form.get("search-input")
+    try:
+        
+        results_list = []
+        search_word = request.form.get("search-input")
+        amount_pages = int(request.form.get("amount-of-pages"))
 
-    Crawler.print_search_word(search_word)
-    results_list = Crawler.scrape_google(search_word)
-    
-    #return render_template('index.html')
-    
-    # scrape_result = function -> results_list.append(scrape_result)
-    
-    if results_list == None:
-        return render_template('index.html', result=results_list)
-    else:
-        return render_template('index.html', result=results_list)
+        Crawler.print_search_word(search_word, amount_pages)
+        results_list = Crawler.scrape_google(search_word, amount_pages)
+        
+        #return render_template('index.html')
+        
+        # scrape_result = function -> results_list.append(scrape_result)
+        
+        if results_list == None:
+            return render_template('index.html', result=results_list)
+        else:
+            return render_template('index.html', result=results_list)
+    except (ValueError, TypeError) as e:
+        results_list.append(e)
+        print("")
+        print(colored("--------------------------- [ Error Message ] --------------------------", 'red'))
+        print(e)
+        print(colored("--------------------------[ End Error Message ]-------------------------", 'red'))
+        print("")
     
 
 @app.route("/clear", methods=["POST"])
