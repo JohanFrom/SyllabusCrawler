@@ -21,7 +21,9 @@ class Crawler:
                 else:
                     html_scrape_result = HTMLScraper.html_scraper(link)
                     empty_list.append(html_scrape_result)
-        except Exception as e:
+        except (TypeError) as e:
+            print(colored("--- Error Message ---", "red"))
+            print(e)
             empty_list.append(e)
             
         return empty_list
