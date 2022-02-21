@@ -11,8 +11,9 @@
     <h1>SyllabusCrawler</h1>
 
     <div id="form_scrape">
-        <form action="{{url_for('read_input')}}" method="post">
+        <form id="search_form" action="{{url_for('read_input')}}" method="post" onsubmit="return CheckInput()">
             <label class="search-bar" for="search-bar">Sök här:</label>
+            <span id="error-message"></span>
             <input id="search-input" name="search-input" type="text">
             <button id="search-button">Sök</button>
             
@@ -34,6 +35,7 @@
             <p id=result-item>{{ scrape }}</p>
         {% endfor %}
     </div>
-    
+
+    <script src="/static/index.js"></script>
 </body>
 </html>

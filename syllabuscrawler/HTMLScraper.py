@@ -1,0 +1,2 @@
+class HTMLScraper:
+    pass

@@ -13,17 +13,24 @@ def index():
 
 @app.route("/search", methods=["POST"])
 def read_input():
-    results_list = []
+    #results_list = []
     search_word = request.form.get("search-input")
 
     Crawler.print_search_word(search_word)
-    # scrape_result = function -> results_list.append(scrape_result)
+    #url = Crawler.Initialize_Selenium(search_word)
+    #print(url)
+    Crawler.get_hrefs(search_word)
     
+    return render_template('index.html')
+    
+    # scrape_result = function -> results_list.append(scrape_result)
+    '''
     for results in results_list:
         if results == None:
             return render_template('index.html', result=["Something went wrong"])
         else:
             return render_template('index.html', result=results)
+    '''
 
 @app.route("/clear", methods=["POST"])
 def clear_result():
