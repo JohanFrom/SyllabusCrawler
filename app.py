@@ -1,4 +1,3 @@
-# Needed modules
 from termcolor import colored
 from flask import Flask, render_template, request
 
@@ -24,7 +23,7 @@ def read_input():
     # scrape_result = function -> results_list.append(scrape_result)
     
     if results_list == None:
-        return render_template('index.html', result=["Something went wrong"])
+        return render_template('index.html', result=results_list)
     else:
         return render_template('index.html', result=results_list)
     
