@@ -2,8 +2,6 @@ from termcolor import colored
 import requests
 import bs4
 import urllib
-from requests_html import HTML
-from requests_html import HTMLSession
 '''
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
