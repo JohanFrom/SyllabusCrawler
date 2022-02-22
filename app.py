@@ -1,5 +1,6 @@
 from termcolor import colored
 from flask import Flask, render_template, request
+import logging
 
 # Classes
 from syllabuscrawler.Crawler import Crawler
@@ -21,19 +22,19 @@ def read_input():
         Crawler.print_search_word(search_word, amount_pages)
         results_list = Crawler.scrape_google(search_word, amount_pages)
         
-        #return render_template('index.html')
-        
-        # scrape_result = function -> results_list.append(scrape_result)
+        #lager1
+        #lager2
+        #lager3
         
         if results_list == None:
             return render_template('index.html', result=results_list)
         else:
             return render_template('index.html', result=results_list)
-    except (ValueError, TypeError) as e:
-        results_list.append(e)
+    except Exception as Argument:
+        results_list.append(Argument)
         print("")
         print(colored("--------------------------- [ Error Message ] --------------------------", 'red'))
-        print(e)
+        logging.exception()
         print(colored("--------------------------[ End Error Message ]-------------------------", 'red'))
         print("")
     
