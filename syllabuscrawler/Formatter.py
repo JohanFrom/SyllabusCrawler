@@ -7,6 +7,4 @@ class Formatter:
             "URL": [links], "Innehåll": [content]
         })
         
-        print(df)
-        
         return df
