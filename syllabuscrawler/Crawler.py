@@ -3,28 +3,39 @@ from googlesearch import search
 from syllabuscrawler.HTMLScraper import HTMLScraper
 from syllabuscrawler.PDFScraper import PDFScraper
 from syllabuscrawler.Formatter import Formatter
+from syllabuscrawler.ListUtility import ListUtility
+from syllabuscrawler.DataFinder import DataFinder
 
 class Crawler:    
 
-    def print_search_word(keyword, pages):
-        print("Keyword:", colored(keyword, "green"))
-        print("Amount of pages:", colored(pages, "green"))
+    def print_search_word(search_word, amount_links, keyword_list):
+        print("Search word:", colored(search_word, "green"))
+        print("Amount of pages:", colored(amount_links, "green"))
+        print("Keywords:", colored(keyword_list, "green"))
+        print("")
     
-    def scrape_google(keyword, pages):
+    def scrape_google(keyword, pages, keywords):
         empty_list = []
         count = 0
         try:
             for link in search(keyword, tld="co.in", num=pages, stop=pages, pause=2):
                 count += 1
-                #print(f"{count}. {colored(link, 'cyan')}")
+                print(f"{count}. {colored(link, 'cyan')}")
                 if ".pdf" in link:
-                    pdf_scrape_result = PDFScraper.pdf_scraper(link)
-                    empty_list.append(pdf_scrape_result)
-                    Formatter.format_tabel(link, pdf_scrape_result)
+                    pdf_scrape_result = PDFScraper.pdf_scraper(link) # Scrape
+                    splitted_pdf_result = ListUtility.splitter(pdf_scrape_result) # Splitter
+                    found_pdf_data = DataFinder.search_for_keyword(splitted_pdf_result, keywords)
+                    #
+                    empty_list.append(found_pdf_data)
+                    Formatter.format_tabel(link, found_pdf_data)
+                
                 else:
-                    html_scrape_result = HTMLScraper.html_scraper(link)
-                    empty_list.append(html_scrape_result)
-                    Formatter.format_tabel(link, html_scrape_result)
+                    html_scrape_result = HTMLScraper.html_scraper(link) # Scrape
+                    splitted_html_result = ListUtility.splitter(html_scrape_result) # Splitter
+                    found_html_data = DataFinder.search_for_keyword(splitted_html_result, keywords)
+                    #
+                    empty_list.append(found_html_data)
+                    Formatter.format_tabel(link, found_html_data)
         
         except (TypeError, ValueError) as e:
             empty_list.append(e)

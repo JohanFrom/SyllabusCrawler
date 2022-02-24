@@ -13,8 +13,16 @@ class PDFScraper:
             
             for i in range(0, number_of_pages):
                 pageObj = pdf.getPage(i)
-                result = pageObj.extractText()    
-                return result
+                result = pageObj.extractText()   
+                
+                data_split = result.split()
+        
+                removers = ["\n", "\r", "\r\n", "\n\r", "\t"]
+                data_remove = [i for i in data_split if 
+                                    i not in removers]
+                data_fixed = ' '.join(data_remove) 
+                
+                return data_fixed
             
             
             
