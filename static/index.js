@@ -1,10 +1,7 @@
 CheckInput = () => {
     const form = document.forms["search_form"]["search-input"].value
     const numbersInput = document.forms["search_form"]["amount-of-pages"].value
-
     const keyword1 = document.forms["search_form"]["input-keyword1"].value
-    const keyword2 = document.forms["search_form"]["input-keyword2"].value
-    const keyword3 = document.forms["search_form"]["input-keyword3"].value
 
     if(form == ""){
         let error = document.getElementById("error-message-input");
@@ -24,14 +21,5 @@ CheckInput = () => {
     if(keyword1 != ""){
         let usedKeyword1 = document.getElementById("used-keywords");
         usedKeyword1.innerHTML = `<p>Nyckelord: ${keyword1}</p>`
-    }
-    if(keyword2 != ""){
-        let usedKeyword2 = document.getElementById("used-keywords");
-        usedKeyword1.innerHTML = `<p>Nyckelord: ${keyword2}</p>`
-    }
-    if(keyword2 != ""){
-        let usedKeyword3 = document.getElementById("used-keywords");
-        usedKeyword1.innerHTML = `<p>Nyckelord: ${keyword3}</p>`;
-        return true
     }
 }

@@ -38,12 +38,14 @@ class Crawler:
                     Formatter.format_tabel(link, found_html_data)
         
         except (TypeError, ValueError) as e:
+            
             empty_list.append(e)
             print("")
             print(colored("--------------------------- [ Error Message ] --------------------------", 'red'))
             print(e)
             print(colored("--------------------------[ End Error Message ]-------------------------", 'red'))
             print("")
+            
             
         return empty_list
 

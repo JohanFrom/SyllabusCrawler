@@ -39,13 +39,14 @@ def read_input():
         else:
             return render_template('index.html', result=results_list)
     except Exception as e:
+        
         results_list.append(e)
         print("")
         print(colored("--------------------------- [ Error Message ] --------------------------", 'red'))
         print(e)
         print(colored("--------------------------[ End Error Message ]-------------------------", 'red'))
         print("")
-    
+        
 
 @app.route("/clear", methods=["POST"])
 def clear_result():
