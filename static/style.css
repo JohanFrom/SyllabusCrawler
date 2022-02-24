@@ -77,3 +77,11 @@ h1 {
 #input-keyword3{
     margin-bottom: 1em;
 }
+
+#used-keywords{
+    margin: auto;
+    text-align: center;
+    border-radius: 3px;
+    max-width: 10em;
+    background-color: rgba(67, 251, 123, 0.815);
+}
