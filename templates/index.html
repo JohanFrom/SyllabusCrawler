@@ -47,7 +47,10 @@
         
 
         {% for scrape in result %}
-            <p id=result-item>{{ scrape }}</p>
+            {% for s in scrape %}
+                <p id=result-item>{{ s }}</p>
+                <hr>
+            {% endfor %}
         {% endfor %}
     </div>
 

@@ -12,7 +12,7 @@ class Crawler:
         print("Search word:", colored(search_word, "green"))
         print("Amount of pages:", colored(amount_links, "green"))
         print("Keywords:", colored(keyword_list, "green"))
-        print("")
+        print("-"*50)
     
     def scrape_google(keyword, pages, keywords):
         empty_list = []
@@ -28,14 +28,18 @@ class Crawler:
                     found_pdf_data = DataFinder.search_for_keyword(splitted_pdf_result, keywords)
                     #
                     empty_list.append(found_pdf_data)
-                    Formatter.format_tabel(link, found_pdf_data)
                 else:
                     html_scrape_result = HTMLScraper.html_scraper(link) # Scrape
                     splitted_html_result = ListUtility.splitter(html_scrape_result) # Splitter
                     found_html_data = DataFinder.search_for_keyword(splitted_html_result, keywords)
+                    if -1 < len(found_html_data):
+                        print("JA")
+                        empty_list.append(found_html_data)
+                    elif -1 > len(found_html_data):
+                        empty_list.append("NO DATA FOUND")    
+                    Formatter.format_table(link, found_html_data, keywords)
                     #
-                    empty_list.append(found_html_data)
-                    Formatter.format_tabel(link, found_html_data)
+                    
         
         except (TypeError, ValueError) as e:
             
@@ -45,7 +49,6 @@ class Crawler:
             print(e)
             print(colored("--------------------------[ End Error Message ]-------------------------", 'red'))
             print("")
-            
             
         return empty_list
 
