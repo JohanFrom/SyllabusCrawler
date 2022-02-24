@@ -14,14 +14,14 @@
         <form id="search_form" action="{{url_for('read_input')}}" method="post" onsubmit="return CheckInput()">
             <label class="search-bar" for="search-bar">Sökord:</label>
             <span id="error-message-input"></span>
-            
+            <input id="search-input" name="search-input" type="text">
+
             <!----------------------- Keywords ----------------------->
-            <label class="keyword1" for="keyword1">Nyckelord 1:</label>
-            <label class="keyword2" for="keyword2">Nyckelord 2:</label>
-            <label class="keyword3" for="keyword3">Nyckelord 3:</label>
+            <label class="keyword1" for="keyword1">Nyckelord 1: <input id="input-keyword1" name="input-keyword1" type="text"> </label>
+            <label class="keyword2" for="keyword2">Nyckelord 2: <input id="input-keyword2" name="input-keyword2" type="text"> </label>
+            <label class="keyword3" for="keyword3">Nyckelord 3: <input id="input-keyword3" name="input-keyword3" type="text"> </label>
             <!-------------------------------------------------------->
 
-            <input id="search-input" name="search-input" type="text">
             <label class="search-bar" for="amount-of-pages">Antal sidor den ska checka (max 15):</label>
             <span id="error-message-number"></span>
             <input id="amount-of-pages" name="amount-of-pages" type="text">
