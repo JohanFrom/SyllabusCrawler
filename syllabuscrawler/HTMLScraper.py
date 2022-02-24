@@ -6,8 +6,9 @@ class HTMLScraper:
     def html_scraper(url):
         request_result = requests.get( url )
         soup = BeautifulSoup(request_result.text, 'html.parser')
-        result = soup.get_text()
-        #result = soup.find_all('p')
+        #result = soup.get_text()
+        #result = soup.find(id="text")
+        result = soup.find_all('p')
         return result
         
         
