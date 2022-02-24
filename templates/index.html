@@ -12,8 +12,15 @@
 
     <div id="form_scrape">
         <form id="search_form" action="{{url_for('read_input')}}" method="post" onsubmit="return CheckInput()">
-            <label class="search-bar" for="search-bar">Sök här:</label>
+            <label class="search-bar" for="search-bar">Sökord:</label>
             <span id="error-message-input"></span>
+            
+            <!----------------------- Keywords ----------------------->
+            <label class="keyword1" for="keyword1">Nyckelord 1:</label>
+            <label class="keyword2" for="keyword2">Nyckelord 2:</label>
+            <label class="keyword3" for="keyword3">Nyckelord 3:</label>
+            <!-------------------------------------------------------->
+
             <input id="search-input" name="search-input" type="text">
             <label class="search-bar" for="amount-of-pages">Antal sidor den ska checka (max 15):</label>
             <span id="error-message-number"></span>
