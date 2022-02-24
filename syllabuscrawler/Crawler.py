@@ -21,6 +21,7 @@ class Crawler:
             for link in search(keyword, tld="co.in", num=pages, stop=pages, pause=2):
                 count += 1
                 print(f"{count}. {colored(link, 'cyan')}")
+                
                 if ".pdf" in link:
                     pdf_scrape_result = PDFScraper.pdf_scraper(link) # Scrape
                     splitted_pdf_result = ListUtility.splitter(pdf_scrape_result) # Splitter
@@ -28,7 +29,6 @@ class Crawler:
                     #
                     empty_list.append(found_pdf_data)
                     Formatter.format_tabel(link, found_pdf_data)
-                
                 else:
                     html_scrape_result = HTMLScraper.html_scraper(link) # Scrape
                     splitted_html_result = ListUtility.splitter(html_scrape_result) # Splitter
