@@ -26,23 +26,18 @@ class Crawler:
                     pdf_scrape_result = PDFScraper.pdf_scraper(link) # Scrape
                     splitted_pdf_result = ListUtility.splitter(pdf_scrape_result) # Splitter
                     found_pdf_data = DataFinder.search_for_keyword(splitted_pdf_result, keywords)
-                    #
                     empty_list.append(found_pdf_data)
+                    Formatter.format_table(link, found_pdf_data, keywords)
+                    # insert into excel table
                 else:
                     html_scrape_result = HTMLScraper.html_scraper(link) # Scrape
                     splitted_html_result = ListUtility.splitter(html_scrape_result) # Splitter
                     found_html_data = DataFinder.search_for_keyword(splitted_html_result, keywords)
-                    if -1 < len(found_html_data):
-                        print("JA")
-                        empty_list.append(found_html_data)
-                    elif -1 > len(found_html_data):
-                        empty_list.append("NO DATA FOUND")    
+                    empty_list.append(found_html_data)
                     Formatter.format_table(link, found_html_data, keywords)
-                    #
                     
         
         except (TypeError, ValueError) as e:
-            
             empty_list.append(e)
             print("")
             print(colored("--------------------------- [ Error Message ] --------------------------", 'red'))
