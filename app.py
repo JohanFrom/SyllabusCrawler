@@ -14,9 +14,7 @@ def index():
 @app.route("/search", methods=["POST"])
 def read_input():
     try:
-        
         results_list = []
-        empty_list = []
         
         search_word = request.form.get("search-input")
         keyword1 = request.form.get("input-keyword1")
@@ -27,11 +25,8 @@ def read_input():
 
         Crawler.print_search_word(search_word, amount_pages, keyword_list)
         results_list = Crawler.scrape_google(search_word, amount_pages, keyword_list)
+        return render_template('index.html', result=results_list, keywords=keyword_list)
         
-        if not empty_list:
-            return render_template('index.html', result=results_list)
-        else:
-            return render_template('index.html', result="")
                 
     except Exception as e:
         print("")

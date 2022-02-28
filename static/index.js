@@ -1,7 +1,8 @@
+// Check input values and loading 
 CheckInput = () => {
     const form = document.forms["search_form"]["search-input"].value
     const numbersInput = document.forms["search_form"]["amount-of-pages"].value
-    const keyword1 = document.forms["search_form"]["input-keyword1"].value
+
 
     if(form == ""){
         let error = document.getElementById("error-message-input");
@@ -18,10 +19,18 @@ CheckInput = () => {
         return false;
     }
 
-    if(keyword1 != ""){
-        let usedKeyword1 = document.getElementById("used-keywords");
-        usedKeyword1.innerHTML = `<p>Nyckelord: ${keyword1}</p>`
-    }
-
     document.getElementById("loader").style.display = "block";
 }
+
+// Check the scrape result
+if(document.URL == "http://127.0.0.1:5000/search"){
+    let displayKeywordInfo = document.getElementById("keywordInfo");
+    displayKeywordInfo.innerHTML = `<span>Nyckelord:</span>`;
+    let pTag = document.getElementById("scrape-result");
+    let errorMessage = document.getElementById("error-message");
+    if(pTag == null || pTag == ""){
+        errorMessage.innerHTML = `<span>Fann inget resultat baserat på det som matats in!</span>`;
+    }
+}
+
+
