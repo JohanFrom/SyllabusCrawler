@@ -22,4 +22,6 @@ CheckInput = () => {
         let usedKeyword1 = document.getElementById("used-keywords");
         usedKeyword1.innerHTML = `<p>Nyckelord: ${keyword1}</p>`
     }
+
+    document.getElementById("loader").style.display = "block";
 }
