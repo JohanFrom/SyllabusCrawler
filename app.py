@@ -14,33 +14,21 @@ def index():
 @app.route("/search", methods=["POST"])
 def read_input():
     try:
-        
         results_list = []
-        search_word = request.form.get("search-input")
         
+        search_word = request.form.get("search-input")
         keyword1 = request.form.get("input-keyword1")
         keyword2 = request.form.get("input-keyword2")
         keyword3 = request.form.get("input-keyword3")
-        
         amount_pages = int(request.form.get("amount-of-pages"))
-        
         keyword_list = [keyword1, keyword2, keyword3]
 
         Crawler.print_search_word(search_word, amount_pages, keyword_list)
-        #to panda
         results_list = Crawler.scrape_google(search_word, amount_pages, keyword_list)
+        return render_template('index.html', result=results_list, keywords=keyword_list)
         
-        #lager1
-        #lager2
-        #lager3
-        
-        if results_list == None:
-            return render_template('index.html', result=results_list)
-        else:
-            return render_template('index.html', result=results_list)
+                
     except Exception as e:
-        
-        results_list.append(e)
         print("")
         print(colored("--------------------------- [ Error Message ] --------------------------", 'red'))
         print(e)
