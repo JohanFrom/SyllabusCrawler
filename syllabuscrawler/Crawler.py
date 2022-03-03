@@ -16,24 +16,30 @@ class Crawler:
     
     def scrape_google(keyword, pages, keywords):
         empty_list = []
+        control_list = []
         count = 0
         try:
             for link in search(keyword, tld="co.in", num=pages, stop=pages, pause=2):
                 count += 1
                 print(f"{count}. {colored(link, 'cyan')}")
-                
                 if ".pdf" in link:
                     pdf_scrape_result = PDFScraper.pdf_scraper(link) # Scrape
                     splitted_pdf_result = ListUtility.splitter(pdf_scrape_result) # Splitter
                     found_pdf_data = DataFinder.search_for_keyword(splitted_pdf_result, keywords)
-                    empty_list.append(found_pdf_data)
-                    Formatter.format_table(link, found_pdf_data, keywords)
+                    if found_pdf_data != control_list:
+                        empty_list.append(found_pdf_data)
+                        #Formatter.format_table(link, found_pdf_data, keywords)
+                    else:
+                        return
                 else:
                     html_scrape_result = HTMLScraper.html_scraper(link) # Scrape
                     splitted_html_result = ListUtility.splitter(html_scrape_result) # Splitter
                     found_html_data = DataFinder.search_for_keyword(splitted_html_result, keywords)
-                    empty_list.append(found_html_data)
-                    Formatter.format_table(link, found_html_data, keywords)
+                    if found_html_data != control_list:
+                        empty_list.append(found_html_data)
+                        #Formatter.format_table(link, found_html_data, keywords)
+                    else:
+                        return
                     
         
         except Exception as e:

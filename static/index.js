@@ -24,12 +24,23 @@ CheckInput = () => {
 
 // Check the scrape result
 if(document.URL == "http://127.0.0.1:5000/search"){
-    let displayKeywordInfo = document.getElementById("keywordInfo");
-    displayKeywordInfo.innerHTML = `<span>Nyckelord:</span>`;
-    let pTag = document.getElementById("scrape-result");
-    let errorMessage = document.getElementById("error-message");
+    const keyword1 = document.forms["search_form"]["input-keyword1"].value;
+    const keyword2 = document.forms["search_form"]["input-keyword2"].value;
+    const keyword3 = document.forms["search_form"]["input-keyword3"].value;
+    const displayKeywordInfo = document.getElementById("keywordInfo");
+    const errorMessage = document.getElementById("error-message");
+    const pTag = document.getElementById("scrape-result");
+
     if(pTag == null || pTag == ""){
         errorMessage.innerHTML = `<span>Fann inget resultat baserat på det som matats in!</span>`;
+    } 
+    console.log(keyword1);
+
+    if(keyword1 == "" && keyword2 == "" && keyword3 == ""){
+        displayKeywordInfo.innerHTML = `<span>Inga nyckelord har angets</span>`;
+        errorMessage.innerHTML = `<span>Fann inget resultat baserat på det som matats in!</span>`;
+    }else{
+        displayKeywordInfo.innerHTML = `<span>Nyckelord:</span>`;
     }
 }
 

@@ -25,7 +25,10 @@ def read_input():
 
         Crawler.print_search_word(search_word, amount_pages, keyword_list)
         results_list = Crawler.scrape_google(search_word, amount_pages, keyword_list)
-        return render_template('index.html', result=results_list, keywords=keyword_list)
+        if results_list != None: 
+            return render_template('index.html', result=results_list, keywords=keyword_list)
+        else:
+            return render_template('index.html')
         
                 
     except Exception as e:

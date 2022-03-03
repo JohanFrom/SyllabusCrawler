@@ -98,8 +98,15 @@ h1 {
 #error-message{
     display: flex;
     justify-content: center;
-    font-size: 18px;
+    font-size: 17px;
     margin-bottom: 10px;
+}
+
+#keywordInfo{
+    display: flex;
+    justify-content: center;
+    font-size: 17px;
+    margin-bottom: 1px;
 }
 
 .keywords{

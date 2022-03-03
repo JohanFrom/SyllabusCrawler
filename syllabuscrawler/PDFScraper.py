@@ -4,19 +4,16 @@ import requests
 
 class PDFScraper:
     
-    def pdf_scraper(url):
+    def pdf_scraper(url):        
         request_result = requests.get( url )
-        
         with io.BytesIO(request_result.content) as f:
             pdf = PdfFileReader(f)
             number_of_pages = pdf.getNumPages()
-            
-            for i in range(0, number_of_pages):
+            for i in range(number_of_pages):
                 pageObj = pdf.getPage(i)
-                result = pageObj.extractText()   
-                
+                result = pageObj.extractText()  
                 data_split = result.split()
-        
+
                 removers = ["\n", "\r", "\r\n", "\n\r", "\t"]
                 data_remove = [i for i in data_split if 
                                     i not in removers]
