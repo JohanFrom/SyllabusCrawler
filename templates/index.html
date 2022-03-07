@@ -17,6 +17,7 @@
             <input id="search-input" name="search-input" type="text">
 
             <!----------------------- Keywords ----------------------->
+            <span class="keywords" id="keywordInfo"></span>
             <label class="keyword1" for="keyword1">Nyckelord 1: <input id="input-keyword1" name="input-keyword1" type="text"> </label>
             <label class="keyword2" for="keyword2">Nyckelord 2: <input id="input-keyword2" name="input-keyword2" type="text"> </label>
             <label class="keyword3" for="keyword3">Nyckelord 3: <input id="input-keyword3" name="input-keyword3" type="text"> </label>
@@ -41,7 +42,7 @@
 
     <div id="scrape_output">
         <h2>Resultat av Scrape</h2>
-        <span class="keywords" id="keywordInfo"></span>
+        <span id="keywordMessage"></span>
         {% for keyword in keywords %}
                 <p class="keywords">{{ keyword }}</p>
         {% endfor %}
