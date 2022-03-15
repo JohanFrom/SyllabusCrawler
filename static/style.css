@@ -40,6 +40,12 @@ h1 {
     justify-content: center;
 }
 
+#save_to_excel{
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
 #reset{
     color: red;
 }

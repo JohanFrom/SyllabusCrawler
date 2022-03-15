@@ -1,5 +1,4 @@
 // Check input values and loading 
-
 CheckInput = () => {
     let serachInput = document.forms["search_form"]["search-input"].value
     let numbersInput = Number(document.forms["search_form"]["amount-of-pages"].value)
@@ -13,7 +12,10 @@ CheckInput = () => {
     if(serachInput == ""){
         errorInput.innerHTML = `<span style='color:#C22D39;'> Please enter search values </span>`;
         return false;
-    } else if(isNaN(numbersInput)){
+    } else if(numbersInput == 0){
+        errorNumber.innerHTML = `<span style='color:#C22D39;'> You must pick a number!</span>`;
+        return false;
+    }else if(isNaN(numbersInput)){
         errorNumber.innerHTML = `<span style='color:#C22D39;'> Must be a number </span>`;
         return false;
     } else if( numbersInput > 15){
@@ -23,10 +25,8 @@ CheckInput = () => {
         displayKeywordInfo.innerHTML = `<span style='color:#C22D39;'>Du måste skriva in minst 1 nyckelord!</span>`;
         return false;
     }else{
-        console.log("HA");
         errorInput.innerHTML = `<span</span>`
         errorNumber.innerHTML = `<span</span>`
-        displayKeywordInfo.innerHTML = `<span></span>`;
         document.getElementById("loader").style.display = "block";
         
         return true;

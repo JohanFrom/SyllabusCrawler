@@ -3,12 +3,11 @@ beautifulsoup4==4.10.0
 click==8.0.3
 Flask==2.0.2
 requests==2.27.1
-selenium==4.1.0
 soupsieve==2.3.1
 urllib3==1.26.8
-webdriver-manager==3.5.2
 python-dotenv==0.19.2
 termcolor==1.1.0
 google==3.0.0
 PyPDF2==1.26.0
 pandas==1.4.1
+xlsxwriter==3.0.3

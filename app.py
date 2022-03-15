@@ -1,11 +1,17 @@
 from termcolor import colored
 from flask import Flask, render_template, request
+from googlesearch import search
 
 # Classes
 from syllabuscrawler.Crawler import Crawler
 from syllabuscrawler.Formatter import Formatter
+from syllabuscrawler.ExcelUtility import ExcelUtility
 
 app = Flask(__name__, static_url_path='/static') # Creates app
+
+results_list = []
+keyword_list = []
+url_list = []
 
 @app.route("/")
 def index(): 
@@ -14,19 +20,29 @@ def index():
 @app.route("/search", methods=["POST"])
 def read_input():
     try:
-        results_list = []
-        
         search_word = request.form.get("search-input")
         keyword1 = request.form.get("input-keyword1")
         keyword2 = request.form.get("input-keyword2")
         keyword3 = request.form.get("input-keyword3")
         amount_pages = int(request.form.get("amount-of-pages"))
-        keyword_list = [keyword1, keyword2, keyword3]
+        results_list.clear()
+        keyword_list.clear()
+        url_list.clear()
+        #keyword_list = [keyword1, keyword2, keyword3]
+        keyword_list.append(keyword1)
+        keyword_list.append(keyword2)
+        keyword_list.append(keyword3)
 
         Crawler.print_search_word(search_word, amount_pages, keyword_list)
-        results_list = Crawler.scrape_google(search_word, amount_pages, keyword_list)
-        if results_list != None: 
-            return render_template('index.html', result=results_list, keywords=keyword_list)
+        for link in search(search_word, tld="co.in", num=amount_pages, stop=amount_pages, pause=2):
+            url_list.append(link)
+            
+        #results_list = Crawler.scrape_google(search_word, amount_pages, keyword_list)
+        results_list.append(Crawler.scrape_google(search_word, amount_pages, keyword_list))
+        if results_list != None:
+            for r in results_list:
+                if r != None: 
+                    return render_template('index.html', result=r, keywords=keyword_list)
         else:
             return render_template('index.html')
         
@@ -37,6 +53,12 @@ def read_input():
         print(e)
         print(colored("--------------------------[ End Error Message ]-------------------------", 'red'))
         print("")
+        
+@app.route("/savetoexcel", methods=["POST"])
+def save_excel():
+    for r in results_list:
+        ExcelUtility.excel_write(r, keyword_list, url_list)
+        return render_template('index.html', result=[["SPARAT till ESXCEL"]])
         
 
 @app.route("/clear", methods=["POST"])
