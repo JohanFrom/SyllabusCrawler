@@ -40,9 +40,9 @@ CheckOutput = () => {
     const errorMessage = document.getElementById("error-message");
     
     errorMessage.innerHTML = `<span></span>`
+    keywordMessage.innerHTML = `<span>Nyckelord:</span>`
 
     if(pTag == null || pTag == "") errorMessage.innerHTML = `<span>Fann inget resultat baserat på det som matats in!</span>`;
-    else keywordMessage.innerHTML = `<span>Nyckelord:</span>`;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
