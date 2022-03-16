@@ -1,6 +1,8 @@
+# Modules
 from termcolor import colored
 from flask import Flask, render_template, request
 from googlesearch import search
+from pathlib import Path
 
 # Classes
 from syllabuscrawler.Crawler import Crawler
@@ -39,10 +41,9 @@ def read_input():
             
         #results_list = Crawler.scrape_google(search_word, amount_pages, keyword_list)
         results_list.append(Crawler.scrape_google(search_word, amount_pages, keyword_list))
+
         if results_list != None:
-            for r in results_list:
-                if r != None: 
-                    return render_template('index.html', result=r, keywords=keyword_list)
+            return render_template('index.html', result=results_list, keywords=keyword_list)
         else:
             return render_template('index.html')
         
@@ -56,10 +57,15 @@ def read_input():
         
 @app.route("/savetoexcel", methods=["POST"])
 def save_excel():
-    for r in results_list:
-        ExcelUtility.excel_write(r, keyword_list, url_list)
-        return render_template('index.html', result=[["SPARAT till ESXCEL"]])
-        
+    file_name = 'search_result.xlsx'
+    path_name = str(Path.home() / 'Downloads')
+    try:
+        ExcelUtility.excel_write(results_list, keyword_list, url_list)
+        return render_template('index.html', result=[['Resultatet är sparat!'], 
+                                                    [f'Filen heter: {file_name}'], 
+                                                    [f'Ligger i katalog: {path_name}']])
+    except Exception as e:
+        render_template('index.html', result=[["Att sparat resultatet misslyckadess"], [f'Felmeddelande: {e}']])
 
 @app.route("/clear", methods=["POST"])
 def clear_result():
