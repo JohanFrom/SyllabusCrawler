@@ -7,6 +7,6 @@ class DataFinder:
             for keyword in keywords:
                 if keyword != "":
                     if keyword in d:
-                        empty_list.append(d)
-                           
+                        empty_list.append(d)                         
+        
         return empty_list

@@ -26,24 +26,23 @@ class Crawler:
                     pdf_scrape_result = PDFScraper.pdf_scraper(link) # Scrape
                     found_pdf_data = DataFinder.search_for_keyword(pdf_scrape_result, keywords)
                     if found_pdf_data != control_list:
-                        empty_list.append(found_pdf_data)
+                        #empty_list.append(found_pdf_data)
+                        empty_list += found_pdf_data
                         #Formatter.format_table(link, found_pdf_data, keywords)
                 else:
                     html_scrape_result = HTMLScraper.html_scraper(link) # Scrape
                     found_html_data = DataFinder.search_for_keyword(html_scrape_result, keywords)
                     if found_html_data != control_list:
-                        empty_list.append(found_html_data)
+                        #empty_list.append(found_html_data)
+                        empty_list += found_html_data
                         #Formatter.format_table(link, found_html_data, keywords)
-                    
-                    
-        
         except Exception as e:
             print("")
             print(colored("--------------------------- [ Error Message ] --------------------------", 'red'))
             print(e)
             print(colored("--------------------------[ End Error Message ]-------------------------", 'red'))
             print("")
-        
+            
         return empty_list
 
         
