@@ -2,8 +2,7 @@ class DataFinder:
 
     def search_for_keyword(data, keywords):
         empty_list = []
-        splitted_data = data.split(".")
-        for d in splitted_data:
+        for d in data:
             for keyword in keywords:
                 if keyword != "":
                     if keyword in d:

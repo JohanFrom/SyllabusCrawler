@@ -1,6 +1,7 @@
 REQUEST (SÖKORD)
  |
-Scrape (Knappar, .js, <a>)
+ V
+Scrape (Sorterat bort, Knappar, .js, <a>)
  |
 Splittern (advanced ".", ";", ",")
  |
@@ -8,4 +9,5 @@ Hittar ([lista av resultatet])
  |
 EXCEL [Formatering]
  |
+ V
 OUT
