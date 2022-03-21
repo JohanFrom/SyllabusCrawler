@@ -13,18 +13,15 @@ class HTMLScraper:
         for s in soup.select("script"):
             s.decompose()  
         for b in soup.select("button"):
-            b.decompose()      
+            b.decompose()
+        for n in soup.select("nav"):
+            n.decompose()
+        for f in soup.select("form"):
+            f.decompose()    
         
         result = soup.get_text()
-        data_split = result.split()
-            
-        # Grundläggande filtering
-        removers = ["\n", "\r", "\r\n", "\n\r", "\t"]
         
-        data_remove = [i for i in data_split if 
-                            i not in removers]
-        data_fixed = ' '.join(data_remove)
-        return data_fixed
+        return result
         
 
         

@@ -2,7 +2,6 @@ from termcolor import colored
 from googlesearch import search
 from syllabuscrawler.HTMLScraper import HTMLScraper
 from syllabuscrawler.PDFScraper import PDFScraper
-from syllabuscrawler.Formatter import Formatter
 from syllabuscrawler.DataFinder import DataFinder
 from syllabuscrawler.ListUtility import ListUtility
 
@@ -25,7 +24,7 @@ class Crawler:
                 print(f"{count}. {colored(link, 'cyan')}")
                 if ".pdf" in link:
                     pdf_scrape_result = PDFScraper.pdf_scraper(link) # Scrape
-                    splitted_pdf_data = ListUtility.splitter(pdf_scrape_result)
+                    splitted_pdf_data = ListUtility.list_formating(pdf_scrape_result)
                     found_pdf_data = DataFinder.search_for_keyword(splitted_pdf_data, keywords)
                     if found_pdf_data != control_list:
                         #empty_list.append(found_pdf_data)
@@ -33,7 +32,7 @@ class Crawler:
                         #Formatter.format_table(link, found_pdf_data, keywords)
                 else:
                     html_scrape_result = HTMLScraper.html_scraper(link) # Scrape
-                    splitted_html_data = ListUtility.splitter(html_scrape_result)
+                    splitted_html_data = ListUtility.list_formating(html_scrape_result)
                     found_html_data = DataFinder.search_for_keyword(splitted_html_data, keywords)
                     if found_html_data != control_list:
                         #empty_list.append(found_html_data)

@@ -6,7 +6,6 @@ from pathlib import Path
 
 # Classes
 from syllabuscrawler.Crawler import Crawler
-from syllabuscrawler.Formatter import Formatter
 from syllabuscrawler.ExcelUtility import ExcelUtility
 
 app = Flask(__name__, static_url_path='/static') # Creates app
@@ -45,7 +44,7 @@ def read_input():
         results_list.append(Crawler.scrape_google(search_word, amount_pages, keyword_list))
 
         if results_list != None:
-            return render_template('index.html', result=results_list, keywords=keyword_list)
+            return render_template('index.html', result=results_list, keywords=keyword_list, search=search_word)
         else:
             return render_template('index.html')
         

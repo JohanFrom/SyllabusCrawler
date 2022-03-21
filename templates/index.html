@@ -50,10 +50,15 @@
 
         <div id="scrape_output">
             <h2>Resultat av Scrape</h2>
-            <span id="keywordMessage"></span>
+
+            <span id="searchword-message"></span>
+            <p class="keywords">{{ search }}</p>
+
+            <span id="keyword-message"></span>
             {% for keyword in keywords %}
                     <p class="keywords">{{ keyword }}</p>
             {% endfor %}
+
             <div id="loader"></div>
             <span id="error-message"></span>
             <hr>

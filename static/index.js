@@ -36,11 +36,13 @@ CheckInput = () => {
 // Check the scrape result
 CheckOutput = () => {
     const pTag = document.getElementById("scrape-result");
-    const keywordMessage = document.getElementById("keywordMessage");
+    const keywordMessage = document.getElementById("keyword-message");
     const errorMessage = document.getElementById("error-message");
+    const searchMessage = document.getElementById("searchword-message");
     
     errorMessage.innerHTML = `<span></span>`
-    keywordMessage.innerHTML = `<span>Nyckelord:</span>`
+    searchMessage.innerHTML = `<strong><span>Sökord:</span></strong>` 
+    keywordMessage.innerHTML = `<strong><span>Nyckelord:</span></strong>`
 
     if(pTag == null || pTag == "") errorMessage.innerHTML = `<span>Fann inget resultat baserat på det som matats in!</span>`;
 }
