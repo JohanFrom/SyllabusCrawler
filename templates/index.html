@@ -11,7 +11,7 @@
     <h1>SyllabusCrawler</h1>
     <section>
         <div id="form_scrape">
-            <form id="search_form" action="{{url_for('read_input')}}" method="post" onsubmit="return CheckInput()">
+            <form id="search_form" action="{{url_for('read_input')}}" method="post" onsubmit="CheckInput()">
                 <label class="search-bar" for="search-bar">Sökord:</label>
                 <span id="error-message-input"></span>
                 <input id="search-input" name="search-input" type="text" placeholder="ex. mobila system kursplan">
