@@ -140,4 +140,5 @@ i{
 .keywords{
     display: flex;
     justify-content: center;
+    flex-direction: row;
 }

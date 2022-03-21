@@ -11,22 +11,27 @@
     <h1>SyllabusCrawler</h1>
     <section>
         <div id="form_scrape">
-            <form id="search_form" action="{{url_for('read_input')}}" method="post" onsubmit="return CheckInput()">
+            <form id="search_form" action="{{url_for('read_input')}}" method="post">
+
+                <!--------------------- Search word ---------------------->
                 <label class="search-bar" for="search-bar">Sökord:</label>
                 <span id="error-message-input"></span>
                 <input id="search-input" name="search-input" type="text" placeholder="ex. mobila system kursplan">
+                <!-------------------------------------------------------->
 
                 <!----------------------- Keywords ----------------------->
-                <span class="keywords" id="keywordInfo"></span>
+                <span id="keyword-info"></span>
                 <label class="explanation" for="explanation"><i>Obs! Minst ett nyckelord behövs för resultat</i></label>
                 <label class="keyword1" for="keyword1">Nyckelord 1: <input id="input-keyword1" name="input-keyword1" type="text" placeholder="ex. syfte"> </label>
                 <label class="keyword2" for="keyword2">Nyckelord 2: <input id="input-keyword2" name="input-keyword2" type="text" placeholder="ex. innehåll"> </label>
                 <label class="keyword3" for="keyword3">Nyckelord 3: <input id="input-keyword3" name="input-keyword3" type="text" placeholder="ex. lärandemål"> </label>
                 <!-------------------------------------------------------->
 
+                <!-------------------- Amonut of pages ------------------->
                 <label class="search-bar" for="amount-of-pages">Antal sidor den ska checka (max 15):</label>
                 <span id="error-message-number"></span>
                 <input id="amount-of-pages" name="amount-of-pages" type="text">
+                <!-------------------------------------------------------->
                 <button id="search-button">Sök</button>
                 
                 <!--<input id="reset" type="submit" value="Reset">
