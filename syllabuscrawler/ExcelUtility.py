@@ -19,10 +19,6 @@ class ExcelUtility:
             worksheet.write('A1', 'Länkar ↓ Nyckelord →') 
             worksheet.set_column('A:D', 50)
             
-            keyword1 = sheet_checker['B1'].value
-            keyword2 = sheet_checker['C1'].value
-            keyword3 = sheet_checker['D1'].value
-            
             for i, link in enumerate(links):
                 worksheet.write('A' + str(i+2), links[i])
                 
@@ -31,6 +27,10 @@ class ExcelUtility:
                     worksheet.write(string.ascii_uppercase[i+1] + str(1), 'Inget nyckelord')
                 else:  
                     worksheet.write(string.ascii_uppercase[i+1] + str(1), keywords[i].capitalize())
+                    
+            keyword1 = sheet_checker['B1'].value
+            keyword2 = sheet_checker['C1'].value
+            keyword3 = sheet_checker['D1'].value
                     
             for r in result:
                 for i, x in enumerate(r, start=0):
