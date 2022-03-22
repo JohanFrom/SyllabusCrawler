@@ -3,6 +3,7 @@ from termcolor import colored
 from flask import Flask, render_template, request
 from googlesearch import search
 from pathlib import Path
+import os
 
 # Classes
 from syllabuscrawler.Crawler import Crawler
@@ -33,9 +34,9 @@ def read_input():
         keyword3 = request.form.get("input-keyword3")
         amount_pages = int(request.form.get("amount-of-pages"))
         
-        keyword_list.append(keyword1.capitalize())
-        keyword_list.append(keyword2.capitalize())
-        keyword_list.append(keyword3.capitalize())
+        keyword_list.append(keyword1)
+        keyword_list.append(keyword2)
+        keyword_list.append(keyword3)
 
         Crawler.print_search_word(search_word, amount_pages, keyword_list)
         for link in search(search_word, tld="co.in", num=amount_pages, stop=amount_pages, pause=2):
@@ -63,7 +64,12 @@ def save_excel():
     path_name = str(Path.home() / 'Downloads')
     try:
         if results_list != control_list:
-            ExcelUtility.excel_write(results_list, keyword_list, url_list)
+            if os.path.isfile(f'{path_name}\{file_name}') == False:
+                ExcelUtility.create_excel_file(path_name, file_name)
+                
+            ExcelUtility.write_links(path_name, file_name, url_list)
+            ExcelUtility.write_keywords(path_name, file_name, keyword_list)
+            ExcelUtility.write_result(path_name, file_name, results_list)
             return render_template('index.html', result=[['Resultatet är sparat!'], 
                                                         [f'Filen heter: {file_name}'], 
                                                         [f'Ligger i katalog: {path_name}']])

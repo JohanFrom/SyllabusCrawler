@@ -14,7 +14,6 @@ class Crawler:
         print("-"*50)  
     
     def scrape_google(keyword, pages, keywords):
-        
         empty_list = []
         control_list = []
         count = 0
@@ -27,17 +26,13 @@ class Crawler:
                     splitted_pdf_data = ListUtility.list_formating(pdf_scrape_result)
                     found_pdf_data = DataFinder.search_for_keyword(splitted_pdf_data, keywords)
                     if found_pdf_data != control_list:
-                        #empty_list.append(found_pdf_data)
                         empty_list += found_pdf_data
-                        #Formatter.format_table(link, found_pdf_data, keywords)
                 else:
                     html_scrape_result = HTMLScraper.html_scraper(link) # Scrape
                     splitted_html_data = ListUtility.list_formating(html_scrape_result)
                     found_html_data = DataFinder.search_for_keyword(splitted_html_data, keywords)
                     if found_html_data != control_list:
-                        #empty_list.append(found_html_data)
                         empty_list += found_html_data
-                        #Formatter.format_table(link, found_html_data, keywords)
         except Exception as e:
             print("")
             print(colored("--------------------------- [ Error Message ] --------------------------", 'red'))
