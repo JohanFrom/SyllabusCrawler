@@ -1,5 +1,6 @@
 import string
 from openpyxl import load_workbook, Workbook
+from openpyxl.styles import Font
 
 class ExcelUtility:  
     
@@ -8,6 +9,7 @@ class ExcelUtility:
         new_book = book.active
         new_book.title = "Sök resultat"
         new_book['A1'] = 'Länkar ↓ Nyckelord →'
+        new_book['A1'].font = Font(bold=True)
         new_book.column_dimensions['B'].width = 40
         new_book.column_dimensions['C'].width = 40
         new_book.column_dimensions['D'].width = 40
@@ -18,8 +20,10 @@ class ExcelUtility:
         book = load_workbook(f'{download_path}\{file_name}')
         ws = book.active
         for i, link in enumerate(links):
-            ws.column_dimensions['A'].width = len(link)
+            ws.column_dimensions['A'].width = len(link) / 2
             ws['A' + str(i+2)] = links[i]
+            ws['A' + str(i+2)].hyperlink = links[i]
+            ws['A' + str(i+2)].style = "Hyperlink"
         
         book.save(f'{download_path}\{file_name}')
         book.close()
@@ -31,8 +35,10 @@ class ExcelUtility:
         for i, keyword in enumerate(keywords):
             if len(keyword) == 0:
                 ws[string.ascii_uppercase[i+1] + str(1)] = 'Inget nyckelord'
+                ws[string.ascii_uppercase[i+1] + str(1)].font = Font(bold=True)
             else:  
                 ws[string.ascii_uppercase[i+1] + str(1)] = keywords[i]
+                ws[string.ascii_uppercase[i+1] + str(1)].font = Font(bold=True)
         book.save(f'{download_path}\{file_name}')
         book.close()
     
