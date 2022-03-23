@@ -11,4 +11,8 @@ class ListUtility:
                             i not in removers]
         data_fixed = ' '.join(data_remove)
         return data_fixed.split(".")
+    
+    def clear_list():
+        empty_list = []
+        return empty_list.clear()
  
