@@ -57,24 +57,29 @@
             <h2>Sökresultat</h2>
 
             <span id="searchword-message"></span>
-            <p class="keywords">{{ search }}</p>
+            <b class="searchterm">{{ search }}</b>
 
             <span id="keyword-message"></span>
             {% for keyword in keywords %}
-                    <p class="keywords">{{ keyword }}</p>
+                <div class="keywords">
+                    <b class="each-keyword">{{ keyword }}</b>
+                </div>
             {% endfor %}
 
             <div id="loader"></div>
             <span id="error-message"></span>
             <hr>
-
+            
+            <div class="all-scrape">
             {% for scrape in result %}
                 {% for s in scrape %}
-                    <p id="scrape-result">{{ s }}</p>
-                    <hr>
+                    
+                        <p id="scrape-result">{{ s }}</p>
+                        <hr>
+                    
                 {% endfor %}
             {% endfor %}
-        
+            </div>
         </div>
     </section>
     <script src="/static/index.js"></script>
