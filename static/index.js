@@ -54,13 +54,34 @@ CheckOutput = () => {
 HighlightWords = () => {
     const scrape_result = document.getElementsByClassName("all-scrape")
     let user_keywords = document.getElementsByClassName("each-keyword")
+
+    for(let i=0; i < user_keywords.length; i++){
+        let word = user_keywords[i].textContent
+
+        for(let i=0; i < scrape_result.length; i++){
+            let sentences = scrape_result[i]
+            let pattern = new RegExp(`${word}`, 'gi')
+
+            sentences.innerHTML = sentences.textContent.replace(
+                pattern, match => `<mark>${match}</mark>`
+            )
+        }
+
+    }
+    /*
+
     for(let i=0; i < scrape_result.length; i++){
-        let word = user_keywords[i].textContent.trim();
+        //let word = user_keywords[i].textContent.trim();
         let sentences = scrape_result[i]
-        let pattern = new RegExp(`${word}`, 'gi')
-        sentences.innerHTML = sentences.textContent.replace(
-            pattern, match => `<hr> <mark>${match}</mark>`
-        )
+        let word = user_keywords[i].textContent
+        for(let i=0; i < user_keywords.length; i++){
+            console.log(user_keywords[i].textContent);
+            let word = user_keywords[i].textContent
+            let pattern = new RegExp(`${word}`, 'gi')
+            sentences.innerHTML = sentences.textContent.replace(
+                pattern, match => `<mark>${match}</mark>`
+            )
+        }
     }
 
 
