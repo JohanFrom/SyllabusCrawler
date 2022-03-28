@@ -49,22 +49,49 @@ CheckOutput = () => {
 }
 
 
-HighlightWords = () => {
-    const user_keywords = document.getElementsByClassName("keywords")
-    const scrape_result = document.getElementsByClassName("all-scrape")
+//Skriv om fast inne i HTML istället
 
+HighlightWords = () => {
+    const scrape_result = document.getElementsByClassName("all-scrape")
+    let user_keywords = document.getElementsByClassName("each-keyword")
+    for(let i=0; i < scrape_result.length; i++){
+        let word = user_keywords[i].textContent.trim();
+        let sentences = scrape_result[i]
+        let pattern = new RegExp(`${word}`, 'gi')
+        sentences.innerHTML = sentences.textContent.replace(
+            pattern, match => `<hr> <mark>${match}</mark>`
+        )
+    }
+
+
+
+    //let pattern = new RegExp(`${user_keywords}`, 'gi')
+
+    /*
+    let user_keywords = document.getElementsByClassName("each-keyword")
+    const scrape_result = document.getElementsByClassName("all-scrape")
+    
     for(let i=0; i < scrape_result.length; i++){
         let word = user_keywords[i].textContent.split('\n').join('').trim();
-        let sentence = scrape_result[i].textContent.split('\n').join('').trim();
-        let x = sentence.includes(word)
+        //let sentences = scrape_result[i].textContent.split('\n').join('').trim();
+        let sentences = scrape_result[i].textContent.trim()
+        
+        console.log(i);        
+        if(sentences.includes(word)){
+            console.log(i);
+            console.log("HEH");
+            sentences.replace(word, `<span class="highlightedWord">` + word + `</span>`)
+        }
+        /*
+        let x = sentences.includes(word)
         
         let replace = `<span id="marked">'+ ${word} + '<span>`;
 
         if(x == true){
-            let markedWord = sentence.replace(word, replace); 
+            let markedWord = sentences.replace(word, replace); 
             markedWord.innerHTML           
         }
-    }
+    }*/
 }
 
 document.addEventListener("DOMContentLoaded", () => {

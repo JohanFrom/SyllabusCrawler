@@ -8,6 +8,7 @@ import os
 # Classes
 from syllabuscrawler.Crawler import Crawler
 from syllabuscrawler.ExcelUtility import ExcelUtility
+from syllabuscrawler.ListUtility import ListUtility
 
 app = Flask(__name__, static_url_path='/static') # Creates app
 
@@ -15,6 +16,7 @@ results_list = []
 keyword_list = []
 url_list = []
 control_list= []
+search_word_list = []
 
 @app.route("/")
 def index(): 
@@ -25,6 +27,7 @@ def read_input():
     results_list.clear()
     keyword_list.clear()
     url_list.clear()
+    search_word_list.clear()
     
     try:
         ''' -v- Form -v- '''
@@ -37,6 +40,7 @@ def read_input():
         keyword_list.append(keyword1)
         keyword_list.append(keyword2)
         keyword_list.append(keyword3)
+        search_word_list.append(search_word)
 
         Crawler.print_search_word(search_word, amount_pages, keyword_list)
         for link in search(search_word, tld="co.in", num=amount_pages, stop=amount_pages, pause=2):
@@ -60,8 +64,12 @@ def read_input():
         
 @app.route("/savetoexcel", methods=["POST"])
 def save_excel():
-    file_name = 'search_result.xlsx'
+    if search_word_list == control_list:
+        file_name = 'sokresultat.xlsx'
+    
+    file_name = f'{search_word_list[0]}.xlsx'
     path_name = str(Path.home() / 'Downloads')
+    
     try:
         if results_list != control_list:
             if os.path.isfile(f'{path_name}\{file_name}') == False:
@@ -71,18 +79,18 @@ def save_excel():
             ExcelUtility.write_keywords(path_name, file_name, keyword_list)
             ExcelUtility.write_result(path_name, file_name, results_list)
             return render_template('index.html', result=[['Resultatet är sparat!'], 
-                                                        [f'Filen heter: {file_name}'], 
+                                                        [f'Filen heter: {file_name}, vilket är ditt sökrod du angav'], 
                                                         [f'Ligger i katalog: {path_name}']])
         else:
             return render_template('index.html', result=[['Sparar inte ner en fil på grund av inget resultat hittat!']])
+    except OSError:
+        return render_template('index.html', result=[['Excel filen är öppen, var snäll och stäng den innan du sparar']])
     except Exception as e:
         return render_template('index.html', result=[['Att spara resultatet misslyckades'], [f'Felmeddelande: {e}']])
 
 @app.route("/clear", methods=["POST"])
 def clear_result():
-    cleared_list = []
-    cleared_list.clear()
-    return render_template("index.html", result=cleared_list)
+    return render_template("index.html", result=ListUtility.clear_list())
     
 
 # Starts the server automatically and run it in debug mode

@@ -17,29 +17,30 @@ class Crawler:
         empty_list = []
         control_list = []
         count = 0
-        try:
-            for link in search(keyword, tld="co.in", num=pages, stop=pages, pause=2):
-                count += 1
-                print(f"{count}. {colored(link, 'cyan')}")
-                if ".pdf" in link:
-                    pdf_scrape_result = PDFScraper.pdf_scraper(link) # Scrape
-                    splitted_pdf_data = ListUtility.list_formating(pdf_scrape_result)
-                    found_pdf_data = DataFinder.search_for_keyword(splitted_pdf_data, keywords)
-                    if found_pdf_data != control_list:
-                        empty_list += found_pdf_data
-                else:
-                    html_scrape_result = HTMLScraper.html_scraper(link) # Scrape
-                    splitted_html_data = ListUtility.list_formating(html_scrape_result)
-                    found_html_data = DataFinder.search_for_keyword(splitted_html_data, keywords)
-                    if found_html_data != control_list:
-                        empty_list += found_html_data
-        except Exception as e:
-            print("")
-            print(colored("--------------------------- [ Error Message ] --------------------------", 'red'))
-            print(e)
-            print(colored("--------------------------[ End Error Message ]-------------------------", 'red'))
-            print("")
-            
+        '''
+        logging.basicConfig(
+            level = logging.DEBUG,
+            format = '127.0.0.1 - - [{asctime}] {levelname:<8} {message}',
+            style = '{'
+        )
+        '''
+        
+        for link in search(keyword, tld="co.in", num=pages, stop=pages, pause=2):
+            count += 1
+            print(f"{count}. {colored(link, 'cyan')}")
+            if ".pdf" in link:
+                pdf_scrape_result = PDFScraper.pdf_scraper(link) # Scrape
+                splitted_pdf_data = ListUtility.list_formating(pdf_scrape_result)
+                found_pdf_data = DataFinder.search_for_keyword(splitted_pdf_data, keywords)
+                if found_pdf_data != control_list:
+                    empty_list += found_pdf_data
+            else:
+                html_scrape_result = HTMLScraper.html_scraper(link) # Scrape
+                splitted_html_data = ListUtility.list_formating(html_scrape_result)
+                found_html_data = DataFinder.search_for_keyword(splitted_html_data, keywords)
+                if found_html_data != control_list:
+                    empty_list += found_html_data
+                    
         return empty_list
 
         
