@@ -48,8 +48,29 @@ CheckOutput = () => {
     if(pTag == null || pTag == "") errorMessage.innerHTML = `<span>Fann inget resultat baserat på det som matats in!</span>`;
 }
 
+/*
+Skriv om fast inne i HTML istället
+
+HighlightWords = () => {
+    const user_keywords = document.getElementsByClassName("keywords")
+    const scrape_result = document.getElementsByClassName("all-scrape")
+
+    for(let i=0; i < scrape_result.length; i++){
+        let word = user_keywords[i].textContent.split('\n').join('').trim();
+        let sentence = scrape_result[i].textContent.split('\n').join('').trim();
+        let x = sentence.includes(word)
+        
+        let replace = `<span id="marked">'+ ${word} + '<span>`;
+
+        if(x == true){
+            let markedWord = sentence.replace(word, replace); 
+            markedWord.innerHTML           
+        }
+    }
+}
+*/
 document.addEventListener("DOMContentLoaded", () => {
-    if(document.URL == "http://127.0.0.1:5000/search") CheckOutput();
+    if(document.URL == "http://127.0.0.1:5000/search") CheckOutput(), HighlightWords();
 })
 
 
