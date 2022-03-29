@@ -52,11 +52,9 @@ CheckOutput = () => {
 //Skriv om fast inne i HTML istället
 
 HighlightWords = () => {
-    //const scrape_result = document.getElementsByClassName("all-scrape")
-    //let user_keywords = document.getElementsByClassName("each-keyword")
-
-    const scrape_result = document.getElementsByClassName("all-scrape")
+    let scrape_result = document.getElementsByClassName("all-scrape")
     let user_keywords = document.getElementsByClassName("each-keyword")
+
     for(let i=0; i < scrape_result.length; i++){
         const words = [
             user_keywords[0].textContent.trim(),
@@ -71,57 +69,12 @@ HighlightWords = () => {
         
         let sentences = scrape_result[i]
         var regex = new RegExp("\\b(?:" + words.join("|") + ")\\b", "gi")
-          
+        
         sentences.innerHTML = sentences.textContent.replace(
             regex, match => `<mark>${match}</mark>`
         )
-        
-    }
-    /*
-
-    for(let i=0; i < scrape_result.length; i++){
-        //let word = user_keywords[i].textContent.trim();
-        let sentences = scrape_result[i]
-        let word = user_keywords[i].textContent
-        for(let i=0; i < user_keywords.length; i++){
-            console.log(user_keywords[i].textContent);
-            let word = user_keywords[i].textContent
-            let pattern = new RegExp(`${word}`, 'gi')
-            sentences.innerHTML = sentences.textContent.replace(
-                pattern, match => `<mark>${match}</mark>`
-            )
-        }
-    }
-
-
-
-    //let pattern = new RegExp(`${user_keywords}`, 'gi')
-
-    /*
-    let user_keywords = document.getElementsByClassName("each-keyword")
-    const scrape_result = document.getElementsByClassName("all-scrape")
     
-    for(let i=0; i < scrape_result.length; i++){
-        let word = user_keywords[i].textContent.split('\n').join('').trim();
-        //let sentences = scrape_result[i].textContent.split('\n').join('').trim();
-        let sentences = scrape_result[i].textContent.trim()
-        
-        console.log(i);        
-        if(sentences.includes(word)){
-            console.log(i);
-            console.log("HEH");
-            sentences.replace(word, `<span class="highlightedWord">` + word + `</span>`)
-        }
-        /*
-        let x = sentences.includes(word)
-        
-        let replace = `<span id="marked">'+ ${word} + '<span>`;
-
-        if(x == true){
-            let markedWord = sentences.replace(word, replace); 
-            markedWord.innerHTML           
-        }
-    }*/
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
