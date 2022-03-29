@@ -17,14 +17,7 @@ class Crawler:
         empty_list = []
         control_list = []
         count = 0
-        '''
-        logging.basicConfig(
-            level = logging.DEBUG,
-            format = '127.0.0.1 - - [{asctime}] {levelname:<8} {message}',
-            style = '{'
-        )
-        '''
-        
+    
         for link in search(keyword, tld="co.in", num=pages, stop=pages, pause=2):
             count += 1
             print(f"{count}. {colored(link, 'cyan')}")
