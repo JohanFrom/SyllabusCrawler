@@ -5,6 +5,7 @@ __pycache__/
 
 # Hide 
 .env
+.google-cookie
 
 # C extensions
 *.so
