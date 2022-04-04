@@ -17,7 +17,7 @@ class HTMLScraper:
         for n in soup.select("nav"):
             n.decompose()
         for f in soup.select("form"):
-            f.decompose()    
+            f.decompose()   
         
         result = soup.get_text()
         

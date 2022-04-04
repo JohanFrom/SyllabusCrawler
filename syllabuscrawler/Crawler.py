@@ -31,6 +31,7 @@ class Crawler:
                 html_scrape_result = HTMLScraper.html_scraper(link) # Scrape
                 splitted_html_data = ListUtility.list_formating(html_scrape_result)
                 found_html_data = DataFinder.search_for_keyword(splitted_html_data, keywords)
+                DataFinder.search_for_content(splitted_html_data, keywords)
                 if found_html_data != control_list:
                     empty_list += found_html_data
                     
