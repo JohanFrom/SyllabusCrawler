@@ -8,7 +8,7 @@ class ExcelUtility:
         book = Workbook()
         new_book = book.active
         new_book.title = "Sök resultat"
-        new_book['A1'] = 'Länkar ↓ Nyckelord →'
+        new_book['A1'] = 'Länkar'
         new_book['A1'].font = Font(bold=True)
         new_book.column_dimensions['B'].width = 40
         new_book.column_dimensions['C'].width = 40
