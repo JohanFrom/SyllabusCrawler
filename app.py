@@ -74,14 +74,16 @@ def save_excel():
     
     try:
         if results_list != control_list:
+            '''
             if os.path.isfile(f'{path_name}\{file_name}') == False:
                 ExcelUtility.create_excel_file(path_name, file_name)
-                
+            '''
+            ExcelUtility.create_excel_file(path_name, file_name)
             ExcelUtility.write_links(path_name, file_name, url_list)
             ExcelUtility.write_keywords(path_name, file_name, keyword_list)
             ExcelUtility.write_result(path_name, file_name, results_list)
             return render_template('index.html', result=[['Resultatet är sparat!'], 
-                                                        [f'Filen heter: {file_name}, vilket är ditt sökrod du angav'], 
+                                                        [f'Filen heter: {file_name}, vilket är ditt sökord du angav'], 
                                                         [f'Ligger i katalog: {path_name}']])
         else:
             return render_template('index.html', result=[['Sparar inte ner en fil på grund av inget resultat hittat!']])
