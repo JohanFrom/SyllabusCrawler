@@ -32,7 +32,6 @@ def read_input():
     
     try:
         start_time = time.time()
-        ''' -v- Form -v- '''
         search_word = request.form.get("search-input")
         keyword1 = request.form.get("input-keyword1")
         keyword2 = request.form.get("input-keyword2")
@@ -74,10 +73,6 @@ def save_excel():
     
     try:
         if results_list != control_list:
-            '''
-            if os.path.isfile(f'{path_name}\{file_name}') == False:
-                ExcelUtility.create_excel_file(path_name, file_name)
-            '''
             ExcelUtility.create_excel_file(path_name, file_name)
             ExcelUtility.write_links(path_name, file_name, url_list)
             ExcelUtility.write_keywords(path_name, file_name, keyword_list)
@@ -88,7 +83,7 @@ def save_excel():
         else:
             return render_template('index.html', result=[['Sparar inte ner en fil på grund av inget resultat hittat!']])
     except OSError:
-        return render_template('index.html', result=[['Excel filen är öppen, var snäll och stäng den innan du sparar']])
+        return render_template('index.html', result=[['Excel filen är öppen, var snäll och stäng filen']])
     except Exception as e:
         return render_template('index.html', result=[['Att spara resultatet misslyckades'], [f'Felmeddelande: {e}']])
 
@@ -96,10 +91,6 @@ def save_excel():
 def clear_result():
     return render_template("index.html", result=ListUtility.clear_list())
 
-
-
-
-# Starts the server automatically and run it in debug mode
 if __name__ == "__main__":
     print(colored("== Running in debug mode ==", "yellow"))
     app.secret_key = "SecretKey"

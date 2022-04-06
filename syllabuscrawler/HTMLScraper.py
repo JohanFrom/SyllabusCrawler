@@ -4,7 +4,6 @@ import requests
 class HTMLScraper:
     
     def html_scraper(url):
-        # Scrape
         request_result = requests.get( url )
         soup = BeautifulSoup(request_result.text, 'html.parser')
         
