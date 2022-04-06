@@ -48,9 +48,6 @@ CheckOutput = () => {
     if(pTag == null || pTag == "") errorMessage.innerHTML = `<span>Fann inget resultat baserat på det som matats in!</span>`;
 }
 
-
-//Skriv om fast inne i HTML istället
-
 HighlightWords = () => {
     let scrape_result = document.getElementsByClassName("all-scrape")
     let user_keywords = document.getElementsByClassName("each-keyword")
@@ -80,6 +77,3 @@ HighlightWords = () => {
 document.addEventListener("DOMContentLoaded", () => {
     if(document.URL == "http://127.0.0.1:5000/search") CheckOutput(), HighlightWords();
 })
-
-
-
