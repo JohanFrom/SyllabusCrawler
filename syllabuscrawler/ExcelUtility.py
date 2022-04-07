@@ -46,7 +46,6 @@ class ExcelUtility:
         c1 = 1;
         c2 = 1;
         c3 = 1;
-        
         book = load_workbook(f'{download_path}\{file_name}')
         ws = book.active
         keyword_1 = ws['B1'].value
