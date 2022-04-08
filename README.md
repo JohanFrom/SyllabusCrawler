@@ -16,7 +16,7 @@ Use ```python``` and if that is not working use ```python3``` or ```python2```.
 $ pip install -r requirements.txt
 $ python app.py 
 ```
-In the terminal it will say ```Running on http://127.0.0.1:5000/```, ```CTRL + CLICK``` on the address and the application will show upp on your browser.
+In the terminal it will say ```Running on http://127.0.0.1:5000/```, ```CTRL + CLICK``` on the address and the application will show upp on your browser, or you can type it in.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
