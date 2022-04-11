@@ -3,8 +3,6 @@ from termcolor import colored
 from flask import Flask, render_template, request
 from googlesearch import search
 from pathlib import Path
-import os
-import time
 
 # Classes
 from syllabuscrawler.Crawler import Crawler
@@ -31,7 +29,6 @@ def read_input():
     search_word_list.clear()
     
     try:
-        start_time = time.time()
         search_word = request.form.get("search-input")
         keyword1 = request.form.get("input-keyword1")
         keyword2 = request.form.get("input-keyword2")
@@ -48,7 +45,7 @@ def read_input():
             url_list.append(link)
             
         results_list.append(Crawler.scrape_google(search_word, amount_pages, keyword_list))
-        print("--- %s seconds ---" % (time.time() - start_time))
+    
         if results_list != None:
             return render_template('index.html', result=results_list, keywords=keyword_list, search=search_word)
         else:
