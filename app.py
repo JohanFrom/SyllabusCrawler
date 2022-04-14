@@ -3,11 +3,13 @@ from termcolor import colored
 from flask import Flask, render_template, request
 from googlesearch import search
 from pathlib import Path
+import os
 
 # Classes
 from syllabuscrawler.Crawler import Crawler
 from syllabuscrawler.ExcelUtility import ExcelUtility
 from syllabuscrawler.ListUtility import ListUtility
+from syllabuscrawler.LoggerUtility import LoggerUtility
 
 app = Flask(__name__, static_url_path='/static') # Creates app
 
@@ -53,11 +55,7 @@ def read_input():
         
                 
     except Exception as e:
-        print("")
-        print(colored("--------------------------- [ Error Message ] --------------------------", 'red'))
-        print(e)
-        print(colored("--------------------------[ End Error Message ]-------------------------", 'red'))
-        print("")
+        LoggerUtility.print_error(e)
         return render_template('index.html', result=[['Något gick fel med att söka'], [f'Felmeddelande: {e}']])
         
 @app.route("/savetoexcel", methods=["POST"])
@@ -90,5 +88,5 @@ def clear_result():
 
 if __name__ == "__main__":
     print(colored("== Running in debug mode ==", "yellow"))
-    app.secret_key = "SecretKey"
+    app.secret_key = os.environ.get('SECRET_KEY')
     app.run(debug=True)
