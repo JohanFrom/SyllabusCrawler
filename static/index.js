@@ -1,5 +1,6 @@
 // Check input values and loading 
 const searchButton = document.getElementById("search-button");
+const HighlightWordsButton = document.getElementById("btn_highlight_keywords");
 
 searchButton.addEventListener('click', (event) => {
     let serachInput = document.forms["search_form"]["search-input"].value
@@ -34,6 +35,11 @@ searchButton.addEventListener('click', (event) => {
     
 })
 
+HighlightWordsButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    HighlightWords();
+})
+
 // Check the scrape result
 CheckOutput = () => {
     const pTag = document.getElementById("scrape-result");
@@ -47,6 +53,8 @@ CheckOutput = () => {
 
     if(pTag == null || pTag == "") errorMessage.innerHTML = `<span>Fann inget resultat baserat på det som matats in!</span>`;
 }
+
+
 
 HighlightWords = () => {
     let scrape_result = document.getElementsByClassName("all-scrape")
@@ -75,5 +83,5 @@ HighlightWords = () => {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    if(document.URL == "http://127.0.0.1:5000/search") CheckOutput(), HighlightWords();
+    if(document.URL == "http://127.0.0.1:5000/search") CheckOutput();
 })
