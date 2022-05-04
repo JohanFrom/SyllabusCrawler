@@ -3,7 +3,6 @@ from termcolor import colored
 from flask import Flask, render_template, request
 from googlesearch import search
 from pathlib import Path
-import os
 
 # Classes
 from syllabuscrawler.Crawler import Crawler
@@ -88,5 +87,5 @@ def clear_result():
 
 if __name__ == "__main__":
     print(colored("== Running in debug mode ==", "yellow"))
-    app.secret_key = os.environ.get('SECRET_KEY')
+    app.secret_key = "SecretKey"
     app.run(debug=True)

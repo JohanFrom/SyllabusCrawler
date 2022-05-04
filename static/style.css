@@ -107,6 +107,10 @@ input{
     margin-bottom: 1em;
 }
 
+#highlight_keywords{
+    padding-top: 10px;
+}
+
 #buttons{
     display: flex;
     flex-direction: row;
@@ -122,9 +126,10 @@ button{
     color: white;
     border-radius: 3px;
     padding: 0.6em;
-    min-width: 5em;
+    min-width: 6em;
     font-size: medium;
     font-weight: bold;
+    margin: 0.2em;
 }
 
 button:hover{
