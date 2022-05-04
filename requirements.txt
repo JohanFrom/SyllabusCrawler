@@ -1,11 +1,9 @@
 beautifulsoup4==4.10.0
-requests==2.25.1
 Flask==2.0.2
 requests==2.27.1
 soupsieve==2.3.1
 urllib3==1.26.8
-python-dotenv==0.19.2
 termcolor==1.1.0
 google==3.0.0
-PyPDF2==1.26.0
+PyPDF2==1.27.9
 openpyxl==3.0.9

@@ -4,7 +4,6 @@ import requests
 class HTMLScraper:
     
     def html_scraper(url):
-        # Scrape
         request_result = requests.get( url )
         soup = BeautifulSoup(request_result.text, 'html.parser')
         
@@ -18,13 +17,7 @@ class HTMLScraper:
             n.decompose()
         for f in soup.select("form"):
             f.decompose()   
-        
+    
         result = soup.get_text()
         
-        return result
-        
-
-        
-        
-        
-        
+        return result       

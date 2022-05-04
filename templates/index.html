@@ -34,8 +34,6 @@
                 <!-------------------------------------------------------->
                 <button id="search-button">Sök</button>
                 
-                <!--<input id="reset" type="submit" value="Reset">
-                <input id="scrape" type="submit" value="Submit">-->
             </form>
         </div>
 
@@ -48,7 +46,7 @@
 
         <div id="save_to_excel">
             <form action="{{url_for('save_excel')}}" method="post">
-                <button>Spara till Excel fil</button>
+                <button id="btn_save_excel">Spara till Excel fil</button>
             </form>
         </div>
     </div>
