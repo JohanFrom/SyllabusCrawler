@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>SyllabusCrawler</h1>
+    <h1>Data Scraper</h1>
     <section>
         <div id="form_scrape">
             <form id="search_form" action="{{url_for('read_input')}}" method="post">
@@ -38,12 +38,6 @@
         </div>
 
     <div id="buttons">
-        <div id="clear_output">
-            <form action="{{url_for('clear_result')}}" method="post">
-                <button>Rensa resultat</button>
-            </form>
-        </div>
-
         <div id="save_to_excel">
             <form action="{{url_for('save_excel')}}" method="post">
                 <button id="btn_save_excel">Spara till Excel fil</button>
@@ -53,6 +47,11 @@
         <div id="highlight_keywords">
             <form method="post">
                 <button id="btn_highlight_keywords">Markera nyckelorden</button>
+            </form>
+        </div>
+        <div id="go-back">
+            <form action="{{url_for('clear_result')}}" method="post">
+                <button>Ingen markering</button>
             </form>
         </div>
     </div>

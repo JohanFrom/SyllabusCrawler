@@ -54,7 +54,7 @@ input{
     color: rgb(102, 102, 102);
 }
 
-#clear_output{
+#go-back{
     padding-top: 10px;
     display: flex;
     justify-content: center;

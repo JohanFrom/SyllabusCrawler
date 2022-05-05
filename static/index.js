@@ -1,6 +1,9 @@
 // Check input values and loading 
 const searchButton = document.getElementById("search-button");
-const HighlightWordsButton = document.getElementById("btn_highlight_keywords");
+const highlightWordsButton = document.getElementById("btn_highlight_keywords");
+const goBackButton = document.getElementById("go-back");
+
+let memento = [];
 
 searchButton.addEventListener('click', (event) => {
     let serachInput = document.forms["search_form"]["search-input"].value
@@ -35,9 +38,14 @@ searchButton.addEventListener('click', (event) => {
     
 })
 
-HighlightWordsButton.addEventListener('click', (event) => {
+highlightWordsButton.addEventListener('click', (event) => {
     event.preventDefault();
     HighlightWords();
+})
+
+goBackButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    GoBack();
 })
 
 // Check the scrape result
@@ -55,8 +63,24 @@ CheckOutput = () => {
 }
 
 
+GoBack = () => {
+    let scrape_result = document.getElementsByClassName("all-scrape")
+    for(let i=0; i < scrape_result.length; i++){
+        let data = scrape_result[i].textContent;
+        let sentences = scrape_result[i];
+
+        sentences.innerHTML = data.replace(
+            sentences, data => `<div>${data}</div>`
+        )
+
+
+
+    }
+}
+
 
 HighlightWords = () => {
+
     let scrape_result = document.getElementsByClassName("all-scrape")
     let user_keywords = document.getElementsByClassName("each-keyword")
 
