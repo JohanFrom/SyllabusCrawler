@@ -81,10 +81,6 @@ def save_excel():
     except Exception as e:
         return render_template('index.html', result=[['Att spara resultatet misslyckades'], [f'Felmeddelande: {e}']])
 
-@app.route("/clear", methods=["POST"])
-def clear_result():
-    return render_template("index.html", result=ListUtility.clear_list())
-
 if __name__ == "__main__":
     print(colored("== Running in debug mode ==", "yellow"))
     app.secret_key = "SecretKey"

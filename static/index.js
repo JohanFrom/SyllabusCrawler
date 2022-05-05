@@ -1,9 +1,8 @@
 // Check input values and loading 
 const searchButton = document.getElementById("search-button");
 const highlightWordsButton = document.getElementById("btn_highlight_keywords");
-const goBackButton = document.getElementById("go-back");
-
-let memento = [];
+const removeMarkButton = document.getElementById("btn-remove-mark");
+const saveExcelButton = document.getElementById("btn_save_excel");
 
 searchButton.addEventListener('click', (event) => {
     let serachInput = document.forms["search_form"]["search-input"].value
@@ -38,14 +37,38 @@ searchButton.addEventListener('click', (event) => {
     
 })
 
+document.addEventListener('DOMContentLoaded', () => {
+    if(document.URL == "http://127.0.0.1:5000/"){
+        highlightWordsButton.style.backgroundColor = "#808080";
+        highlightWordsButton.disabled = true
+        removeMarkButton.style.backgroundColor = "#808080";
+        removeMarkButton.disabled = true
+        saveExcelButton.style.backgroundColor = "#808080";
+        saveExcelButton.disabled = true
+    }
+})
+
+document.addEventListener("click", () => {
+    if(document.URL == "http://127.0.0.1:5000/search") {
+        CheckOutput();
+        highlightWordsButton.style.backgroundColor = "rgb(38, 93, 61)";
+        highlightWordsButton.disabled = false
+        removeMarkButton.style.backgroundColor = "rgb(38, 93, 61)";
+        removeMarkButton.disabled = false
+        saveExcelButton.style.backgroundColor = "rgb(38, 93, 61)";
+        saveExcelButton.disabled = false
+    }
+})
+
+
 highlightWordsButton.addEventListener('click', (event) => {
     event.preventDefault();
     HighlightWords();
 })
 
-goBackButton.addEventListener('click', (event) => {
+removeMarkButton.addEventListener('click', (event) => {
     event.preventDefault();
-    GoBack();
+    RemoveMark();
 })
 
 // Check the scrape result
@@ -63,21 +86,18 @@ CheckOutput = () => {
 }
 
 
-GoBack = () => {
+RemoveMark = () => {
     let scrape_result = document.getElementsByClassName("all-scrape")
     for(let i=0; i < scrape_result.length; i++){
         let data = scrape_result[i].textContent;
         let sentences = scrape_result[i];
 
         sentences.innerHTML = data.replace(
-            sentences, data => `<div>${data}</div>`
+            sentences, data => `<p>${data}</p><br>`
         )
-
-
 
     }
 }
-
 
 HighlightWords = () => {
 
@@ -105,7 +125,3 @@ HighlightWords = () => {
     
     }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    if(document.URL == "http://127.0.0.1:5000/search") CheckOutput();
-})
