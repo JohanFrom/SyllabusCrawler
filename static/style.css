@@ -54,7 +54,7 @@ input{
     color: rgb(102, 102, 102);
 }
 
-#clear_output{
+#remove-mark{
     padding-top: 10px;
     display: flex;
     justify-content: center;
@@ -64,10 +64,6 @@ input{
     padding-top: 10px;
     display: flex;
     justify-content: center;
-}
-
-#reset{
-    color: red;
 }
 
 #scrape{
