@@ -7,7 +7,6 @@ from pathlib import Path
 # Classes
 from syllabuscrawler.Crawler import Crawler
 from syllabuscrawler.ExcelUtility import ExcelUtility
-from syllabuscrawler.ListUtility import ListUtility
 from syllabuscrawler.LoggerUtility import LoggerUtility
 
 app = Flask(__name__, static_url_path='/static') # Creates app
