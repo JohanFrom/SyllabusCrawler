@@ -1,3 +1,5 @@
+__author__ = "Johan From and Fredrik Bramell" 
+
 # Modules
 from termcolor import colored
 from flask import Flask, render_template, request
