@@ -43,8 +43,6 @@ h1 {
 }
 
 input{
-    border: none;
-    background-color: rgb(172, 197, 172);
     border-radius: 3px;
     padding: 5px;
     margin-bottom: 1em;
