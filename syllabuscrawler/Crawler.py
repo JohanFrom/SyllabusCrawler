@@ -1,7 +1,6 @@
 from googlesearch import search
 from syllabuscrawler.LoggerUtility import LoggerUtility
-from syllabuscrawler.HTMLScraper import HTMLScraper
-from syllabuscrawler.PDFScraper import PDFScraper
+from syllabuscrawler.Scraper import Scraper
 from syllabuscrawler.DataFinder import DataFinder
 from syllabuscrawler.ListUtility import ListUtility
 
@@ -24,13 +23,13 @@ class Crawler:
             LoggerUtility.print_debug(f"{i+1}. {link}")
             
             if ".pdf" in link:
-                pdf_scrape_result = PDFScraper.pdf_scraper(link)
+                pdf_scrape_result = Scraper.pdf_scraper(link)
                 splitted_pdf_data = ListUtility.list_formating(pdf_scrape_result)
                 found_pdf_data = DataFinder.search_for_keyword(splitted_pdf_data, keywords)
                 if found_pdf_data != control_list:
                     empty_list += found_pdf_data
             else:
-                html_scrape_result = HTMLScraper.html_scraper(link)
+                html_scrape_result = Scraper.html_scraper(link)
                 splitted_html_data = ListUtility.list_formating(html_scrape_result)
                 found_html_data = DataFinder.search_for_keyword(splitted_html_data, keywords)
                 if found_html_data != control_list:
