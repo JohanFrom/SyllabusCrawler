@@ -16,16 +16,16 @@ searchButton.addEventListener('click', (event) => {
 
     if(serachInput == ""){
         event.preventDefault()
-        errorInput.innerHTML = `<span style='color:#C22D39;'> Please enter search values </span>`;
+        errorInput.innerHTML = `<span style='color:#C22D39;'> Du måste skriva in sökord </span>`;
     } else if(numbersInput == 0){
         event.preventDefault()
-        errorNumber.innerHTML = `<span style='color:#C22D39;'> You must pick a number!</span>`;
+        errorNumber.innerHTML = `<span style='color:#C22D39;'> Du måste välja ett nummer!</span>`;
     }else if(isNaN(numbersInput)){
         event.preventDefault()
-        errorNumber.innerHTML = `<span style='color:#C22D39;'> Must be a number </span>`;
+        errorNumber.innerHTML = `<span style='color:#C22D39;'> Det du matat in måste vara ett nummer! </span>`;
     } else if( numbersInput > 15){
         event.preventDefault()
-        errorNumber.innerHTML = `<span style='color:#C22D39;'> Max number is 15</span>`;
+        errorNumber.innerHTML = `<span style='color:#C22D39;'> Maximala antalet är 15</span>`;
     } else if(keyword1 == "" && keyword2 == "" && keyword3 == ""){
         event.preventDefault()
         displayKeywordInfo.innerHTML = `<span style='color:#C22D39;'>Du måste skriva in minst 1 nyckelord!</span>`;
